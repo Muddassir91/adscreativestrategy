@@ -4,6 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CSOS | Creative Strategy Skills Test</title>
+
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1569191080819717');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1569191080819717&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -974,8 +993,8 @@
         <div class="done-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <p class="done-heading">Check your inbox.</p>
-        <p class="done-text">Your Creative Strategy Profile is on the way. It'll tell you exactly where you stand and what the next move is.</p>
+        <p class="done-heading">Check your email.</p>
+        <p class="done-text">Your Creative Strategy Profile is on the way. Check your inbox (and spam) for your results.</p>
         <div class="done-tiers">
           <span class="done-tier">Writer</span>
           <span class="done-tier">Student</span>
@@ -983,10 +1002,6 @@
           <span class="done-tier">Strategist</span>
           <span class="done-tier mystery">You: ???</span>
         </div>
-        <a id="downloadReport" href="#" class="btn btn-teal" style="display:none; margin-top: 24px; text-decoration: none; text-align: center;" target="_blank">
-          Download Your Full Report (PDF)
-          <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
       </div>
     </div>
   </div>
@@ -1102,7 +1117,7 @@
         const tierShort = tierMap[result.tier] || 'Student';
 
         document.querySelector('.done-heading').textContent = 'You are: ' + result.tier + '.';
-        document.querySelector('.done-text').textContent = 'Your full Creative Strategy Profile is ready. Download it below to see your level, your biggest gap, and what to focus on next.';
+        document.querySelector('.done-text').textContent = 'Check your email. Your full Creative Strategy Profile is on the way with your level, your biggest gap, and what to focus on next.';
 
         // Highlight their tier in the done screen
         document.querySelectorAll('.done-tier').forEach(el => {
@@ -1115,16 +1130,10 @@
         const mysteryTier = document.querySelector('.done-tier:last-child');
         if (mysteryTier) mysteryTier.remove();
 
-        // Show download link for the matching PDF report
-        const pdfMap = {
-          'Writer': 'CSOS_Report_The_Writer.pdf',
-          'Student': 'CSOS_Report_The_Student.pdf',
-          'Practitioner': 'CSOS_Report_The_Practitioner.pdf',
-          'Strategist': 'CSOS_Report_The_Strategist.pdf'
-        };
-        const downloadBtn = document.getElementById('downloadReport');
-        downloadBtn.href = '/pdfs/' + pdfMap[tierShort];
-        downloadBtn.style.display = 'inline-flex';
+        // Fire Meta Pixel Lead event
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'Lead');
+        }
 
       } catch (err) {
         console.error('Scoring error:', err);
