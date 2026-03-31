@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ContextOS - Stop Re-Explaining Yourself to AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --off-white: #f8f8f6;
+  --gray-light: #e5e5e3;
+  --gray-mid: #8a8a86;
+  --gray-dark: #4a4a48;
+  --accent: #0f766e;
+  --accent-light: #14b8a6;
+  --accent-bg: #f0fdfa;
+  --heading: 'Archivo', sans-serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+html { font-size: 18px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.container-full { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+section { padding: 100px 0; }
+
+h1, h2, h3 { font-family: var(--heading); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+h1 { font-size: 3.2rem; }
+h2 { font-size: 2.4rem; }
+h3 { font-size: 1.6rem; }
+p { font-size: 1.05rem; color: var(--gray-dark); margin-bottom: 1.4em; }
+p.large { font-size: 1.25rem; line-height: 1.65; }
+
+/* ---- ANIMATIONS ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1, .hero .sub, .hero .label {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+.hero .label { animation-delay: 0s; }
+.hero h1 { animation-delay: 0.15s; }
+.hero .sub { animation-delay: 0.3s; }
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px;
+  background: var(--black);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(15,118,110,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero h1 { color: var(--white); margin-bottom: 28px; max-width: 740px; }
+.hero .sub { color: rgba(255,255,255,0.55); font-size: 1.15rem; max-width: 560px; margin: 0 auto 12px; }
+.hero .label {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 24px;
+}
+
+/* ---- PAIN GRID ---- */
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--gray-light);
+  border-left: 1px solid var(--gray-light);
+  margin-top: 56px;
+}
+.pain-card {
+  padding: 40px 32px;
+  border-right: 1px solid var(--gray-light);
+  border-bottom: 1px solid var(--gray-light);
+}
+.pain-number {
+  font-family: var(--heading);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.pain-card h4 {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-mid);
+  margin-bottom: 12px;
+}
+.pain-card p { font-size: 0.92rem; margin-bottom: 0; }
+
+/* ---- DIVIDER ---- */
+.divider-quote {
+  padding: 100px 24px;
+  text-align: center;
+  background: var(--off-white);
+}
+.divider-quote h2 { max-width: 680px; margin: 0 auto; line-height: 1.25; }
+.divider-quote .sub { margin-top: 20px; font-size: 1rem; color: var(--gray-mid); }
+
+/* ---- WHAT IS ---- */
+.tag-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 16px;
+}
+.not-list { margin-top: 28px; display: flex; gap: 32px; }
+.not-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--gray-mid);
+}
+.not-item .x { color: #dc2626; font-weight: 700; font-size: 1rem; }
+.yes-item .x { color: #16a34a; }
+
+/* ---- LAYERS ---- */
+.layers-section { background: var(--black); color: var(--white); padding: 120px 0; }
+.layers-section h2 { color: var(--white); margin-bottom: 16px; }
+.layers-section .subtitle { color: rgba(255,255,255,0.45); font-size: 1rem; margin-bottom: 72px; }
+
+.layer-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 40px;
+  padding: 48px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  align-items: start;
+}
+.layer-item:last-child { border-bottom: none; }
+.layer-num {
+  font-family: var(--heading);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.12);
+  line-height: 1;
+}
+.layer-content h3 {
+  font-family: var(--heading);
+  color: var(--white);
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+}
+.layer-content p {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+.layer-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  background: rgba(15,118,110,0.12);
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+.layer-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+.layer-bullets li {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.88rem;
+  padding: 6px 0;
+  padding-left: 16px;
+  position: relative;
+}
+.layer-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* ---- FEEDBACK PIPELINE ---- */
+.pipeline-steps { display: flex; gap: 0; margin-top: 20px; }
+.pipe-step {
+  flex: 1;
+  padding: 20px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+  position: relative;
+}
+.pipe-step:not(:last-child)::after {
+  content: '\2192';
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.15);
+  font-size: 1.2rem;
+  z-index: 1;
+}
+.pipe-step .num { font-family: var(--heading); font-size: 1.4rem; font-weight: 700; color: var(--accent-light); margin-bottom: 6px; }
+.pipe-step .label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); line-height: 1.4; }
+
+/* ---- HOW IT WORKS ---- */
+.step-grid { margin-top: 64px; }
+.step-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 32px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--gray-light);
+  align-items: start;
+}
+.step-item:last-child { border-bottom: none; }
+.step-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--off-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--black);
+}
+.step-item h4 { font-family: var(--heading); font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; }
+.step-item p { font-size: 0.9rem; margin-bottom: 0; }
+.step-time {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-top: 8px;
+}
+
+/* ---- COMPARISON TABLE ---- */
+.compare-section { background: var(--off-white); }
+.compare-table { margin-top: 56px; width: 100%; border-collapse: collapse; }
+.compare-table th, .compare-table td {
+  padding: 18px 24px;
+  text-align: left;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--gray-light);
+}
+.compare-table th {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-mid);
+}
+.compare-table td:first-child { color: var(--gray-mid); font-weight: 500; }
+.compare-table td:nth-child(2) { color: var(--gray-mid); }
+.compare-table td:nth-child(3) { color: var(--black); font-weight: 600; }
+
+/* ---- FOR/NOT FOR ---- */
+.for-section { background: var(--white); }
+.for-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-top: 56px;
+}
+.for-col h3 {
+  font-size: 1rem;
+  font-family: var(--sans);
+  font-weight: 700;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.for-col .icon-yes { color: #16a34a; font-size: 1.1rem; }
+.for-col .icon-no { color: #dc2626; font-size: 1.1rem; }
+.for-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.9rem;
+  color: var(--gray-dark);
+  line-height: 1.5;
+}
+.for-item strong { color: var(--black); font-weight: 600; }
+
+/* ---- MATH ---- */
+.math-section { background: var(--off-white); }
+.math-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 56px;
+  border: 1px solid var(--gray-light);
+}
+.math-card {
+  padding: 48px 32px;
+  text-align: center;
+  border-right: 1px solid var(--gray-light);
+  background: var(--white);
+}
+.math-card:last-child { border-right: none; }
+.math-card .num { font-family: var(--heading); font-size: 2.8rem; font-weight: 700; color: var(--black); line-height: 1; margin-bottom: 8px; }
+.math-card .unit { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-mid); margin-bottom: 16px; }
+.math-card p { font-size: 0.88rem; margin-bottom: 0; }
+
+/* ---- FAQ ---- */
+.faq-section { background: var(--white); }
+.faq-item { padding: 28px 0; border-bottom: 1px solid var(--gray-light); }
+.faq-item h4 { font-family: var(--heading); font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
+.faq-item p { font-size: 0.9rem; margin-bottom: 0; }
+
+/* ---- CTA ---- */
+.cta-section {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 120px 24px;
+}
+.cta-section h2 { color: var(--white); margin-bottom: 20px; }
+.cta-section p { color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto 40px; }
+
+.btn-primary {
+  display: inline-block;
+  padding: 18px 48px;
+  background: var(--accent);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { background: #0e6b63; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(15,118,110,0.3); }
+.btn-secondary {
+  display: inline-block;
+  padding: 18px 48px;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.5); }
+
+/* ---- OFFER TIERS ---- */
+.offer-section { background: var(--off-white); padding: 120px 0; }
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 64px;
+  border: 1px solid var(--gray-light);
+}
+.offer-card {
+  padding: 48px 36px;
+  border-right: 1px solid var(--gray-light);
+  position: relative;
+  background: var(--white);
+}
+.offer-card:last-child { border-right: none; }
+.offer-card.featured {
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+  margin: -16px 0;
+  padding: 64px 36px;
+  border-radius: 4px;
+  z-index: 1;
+}
+.offer-card .tier-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gray-mid); margin-bottom: 12px; }
+.offer-card.featured .tier-label { color: var(--accent-light); }
+.offer-card h3 { font-size: 1.3rem; margin-bottom: 12px; }
+.offer-card.featured h3 { color: var(--white); }
+.offer-card .price { font-family: var(--heading); font-size: 2.4rem; font-weight: 700; margin-bottom: 24px; line-height: 1; }
+.offer-card.featured .price { color: var(--white); }
+.offer-card .desc { font-size: 0.86rem; color: var(--gray-mid); margin-bottom: 32px; line-height: 1.6; }
+.offer-card.featured .desc { color: rgba(255,255,255,0.45); }
+.offer-card .feature-list { list-style: none; padding: 0; margin: 0 0 36px; }
+.offer-card .feature-list li { font-size: 0.85rem; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--gray-dark); }
+.offer-card.featured .feature-list li { border-bottom-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); }
+
+/* ---- STICKY BAR ---- */
+.sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  z-index: 100;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.sticky-bar.visible { transform: translateY(0); }
+.sticky-bar p { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin: 0; }
+.sticky-bar .btn-primary { padding: 12px 32px; font-size: 0.82rem; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  html { font-size: 16px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+  section { padding: 72px 0; }
+  .hero { padding: 100px 24px; min-height: auto; }
+  .pain-grid { grid-template-columns: 1fr; }
+  .for-grid { grid-template-columns: 1fr; gap: 40px; }
+  .math-grid { grid-template-columns: 1fr; }
+  .math-card { border-right: none; border-bottom: 1px solid var(--gray-light); }
+  .math-card:last-child { border-bottom: none; }
+  .offer-grid { grid-template-columns: 1fr; }
+  .offer-card { border-right: none; border-bottom: 1px solid var(--gray-light); }
+  .offer-card.featured { margin: 0; padding: 48px 36px; }
+  .layer-item { grid-template-columns: 1fr; gap: 8px; }
+  .layer-num { font-size: 2rem; }
+  .pipeline-steps { flex-direction: column; }
+  .pipe-step:not(:last-child)::after { display: none; }
+  .compare-table { font-size: 0.82rem; }
+  .compare-table th, .compare-table td { padding: 14px 12px; }
+  .not-list { flex-direction: column; gap: 12px; }
+  .step-item { grid-template-columns: 1fr; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================================ -->
+<!-- HERO -->
+<!-- ================================ -->
+<section class="hero">
+  <div>
+    <span class="label">For marketers, copywriters, and solo operators who use AI daily</span>
+    <h1>Go from hours of back-and-forth with Claude to usable first drafts in one setup.</h1>
+    <p class="sub">Install ContextOS to turn Claude from a chatty intern who forgets everything into a proper assistant that knows your voice, follows your standards, and improves with every correction.</p>
+    <p class="sub" style="color: rgba(255,255,255,0.35); font-size: 0.92rem; margin-top: 8px;">No prompts to rewrite. No context to reload. One system. Set up once.</p>
+    <div style="margin-top: 48px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="#offer" class="btn-primary">Get ContextOS</a>
+      <a href="#how" class="btn-secondary">See how it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- COST OF FORGETTING -->
+<!-- ================================ -->
+<section style="padding: 100px 0 60px;">
+  <div class="container-wide">
+    <h2>What starting from zero costs you every session.</h2>
+  </div>
+  <div class="container-full">
+    <div class="pain-grid">
+      <div class="pain-card reveal reveal-delay-1">
+        <div class="pain-number">10-15</div>
+        <h4>Minutes per session</h4>
+        <p>Re-explaining who you are, what you do, and how you want things written.</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-2">
+        <div class="pain-number">30+</div>
+        <h4>Minutes rewriting</h4>
+        <p>Generic output that sounds like a stranger wrote it. You rewrite from scratch.</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-3">
+        <div class="pain-number">5-8</div>
+        <h4>Hours per month</h4>
+        <p>Burned on setup. Not thinking. Not creating. Just loading context.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- DIVIDER -->
+<!-- ================================ -->
+<section class="divider-quote">
+  <div class="container reveal">
+    <h2>Better prompts are not the answer. Better context is.</h2>
+    <p class="sub">Prompts disappear when the chat ends. Context stays, loads automatically, and compounds over time.</p>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- WHAT IS CONTEXTOS -->
+<!-- ================================ -->
+<section>
+  <div class="container">
+    <span class="tag-label">What is ContextOS</span>
+    <h2 style="margin-bottom: 24px;">A complete AI operating system built inside Claude Desktop.</h2>
+    <p style="max-width: 640px; font-size: 1.1rem; line-height: 1.75;">Permanent memory. Self-improving skill files. A feedback engine that makes every session smarter than the last. You set it up once. Claude remembers forever.</p>
+    <div class="not-list">
+      <div class="not-item"><span class="x">&times;</span> Not a course</div>
+      <div class="not-item"><span class="x">&times;</span> Not a prompt template</div>
+      <div class="not-item yes-item"><span class="x">&check;</span> A working system with six layers</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- THE SIX LAYERS -->
+<!-- ================================ -->
+<section class="layers-section" id="layers">
+  <div class="container-wide">
+    <h2>Six layers. Each one compounds on the last.</h2>
+    <p class="subtitle">Together, they replace the setup work you do every single session.</p>
+
+    <div class="layer-item reveal">
+      <div class="layer-num">01</div>
+      <div class="layer-content">
+        <span class="layer-tag">Foundation</span>
+        <h3>Identity</h3>
+        <p>Three context files that tell Claude everything about you. Loads automatically every session through Global Instructions.</p>
+        <ul class="layer-bullets">
+          <li>Your role, experience, and working style</li>
+          <li>Separate brand voices (employer vs. personal)</li>
+          <li>Output format, length, and tone preferences</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer-item reveal">
+      <div class="layer-num">02</div>
+      <div class="layer-content">
+        <span class="layer-tag">Specialization</span>
+        <h3>Skills</h3>
+        <p>A dedicated skill file for every type of work you do. Each with its own rules, voice, templates, and quality standards.</p>
+        <ul class="layer-bullets">
+          <li>Email sequences follow different rules than Twitter posts</li>
+          <li>Research summaries have a different format than landing pages</li>
+          <li>Each file has: Purpose, Rules, Current Baseline, Feedback Log</li>
+          <li>The baseline updates every time you give feedback</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer-item reveal">
+      <div class="layer-num">03</div>
+      <div class="layer-content">
+        <span class="layer-tag">Self-improving</span>
+        <h3>The Feedback Engine</h3>
+        <p>Most AI setups are static. Build a prompt, it works okay, it never gets better. ContextOS improves every time you use it.</p>
+        <div class="pipeline-steps">
+          <div class="pipe-step"><div class="num">1</div><div class="label">Extract</div></div>
+          <div class="pipe-step"><div class="num">2</div><div class="label">Categorize</div></div>
+          <div class="pipe-step"><div class="num">3</div><div class="label">Update</div></div>
+          <div class="pipe-step"><div class="num">4</div><div class="label">Confirm</div></div>
+          <div class="pipe-step"><div class="num">5</div><div class="label">Apply now</div></div>
+        </div>
+        <p style="margin-top: 20px;">Month three output sounds nothing like week one. The system learned your voice through use, not a one-time prompt.</p>
+      </div>
+    </div>
+
+    <div class="layer-item reveal">
+      <div class="layer-num">04</div>
+      <div class="layer-content">
+        <span class="layer-tag">Structure</span>
+        <h3>Weekly Planning</h3>
+        <p>One plan for your full-time job and your side business. Claude proposes it Monday, checks progress daily, flags when you drift.</p>
+        <ul class="layer-bullets">
+          <li>One top priority per day plus supporting tasks</li>
+          <li>Carried-over items show up automatically</li>
+          <li>Weekly review: what worked, what did not, key numbers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer-item reveal">
+      <div class="layer-num">05</div>
+      <div class="layer-content">
+        <span class="layer-tag">Output</span>
+        <h3>Content Production</h3>
+        <p>Batched drafts in your voice, ready for review. Nothing goes live without your approval.</p>
+        <ul class="layer-bullets">
+          <li>Drafts marked with notes where Claude needs your real input</li>
+          <li>After you edit and give feedback, skill files update</li>
+          <li>Next batch is tighter. The one after that is tighter still</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer-item reveal">
+      <div class="layer-num">06</div>
+      <div class="layer-content">
+        <span class="layer-tag">Integration</span>
+        <h3>Tool Connections</h3>
+        <p>Claude connects to Google Drive, Notion, Gmail, and Slack. Works inside your real workflow instead of waiting for you to paste things into a chat window.</p>
+        <ul class="layer-bullets">
+          <li>Workspace audit during setup with folder reorganization</li>
+          <li>Every database documented with entry formats and processes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- HOW IT WORKS -->
+<!-- ================================ -->
+<section id="how">
+  <div class="container-wide">
+    <span class="tag-label">How it works</span>
+    <h2>One sitting. Five steps. Then it runs itself.</h2>
+
+    <div class="step-grid">
+      <div class="step-item reveal">
+        <div class="step-circle">1</div>
+        <div>
+          <h4>Answer the deep questions</h4>
+          <p>How you work, your biggest bottleneck, what sounds wrong when AI writes for you, what a typical Monday looks like.</p>
+          <span class="step-time">30-45 minutes</span>
+        </div>
+      </div>
+      <div class="step-item reveal">
+        <div class="step-circle">2</div>
+        <div>
+          <h4>System builds everything from your answers</h4>
+          <p>Context files, skill library, feedback engine, weekly planner, content pipeline. You do not write any of it.</p>
+          <span class="step-time">Automatic</span>
+        </div>
+      </div>
+      <div class="step-item reveal">
+        <div class="step-circle">3</div>
+        <div>
+          <h4>Drop files. Paste instructions. Run the prompt.</h4>
+          <p>One folder on your desktop. One paste into Claude Desktop settings. One master prompt. It builds while you do something else.</p>
+          <span class="step-time">20-30 min (runs itself)</span>
+        </div>
+      </div>
+      <div class="step-item reveal">
+        <div class="step-circle">4</div>
+        <div>
+          <h4>Review first output. Give feedback.</h4>
+          <p>Edit the first batch. Tell the system what is wrong. Skill files update. You are live.</p>
+        </div>
+      </div>
+      <div class="step-item reveal">
+        <div class="step-circle">5</div>
+        <div>
+          <h4>Every session starts where you left off</h4>
+          <p>No re-explaining. No context loading. Claude checks for feedback, updates skills, pulls your plan. Just work.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- BEFORE vs AFTER -->
+<!-- ================================ -->
+<section class="compare-section">
+  <div class="container-wide">
+    <h2>Same person. Same AI. Different system.</h2>
+
+    <table class="compare-table reveal">
+      <thead>
+        <tr>
+          <th style="width: 38%;">What happens</th>
+          <th style="width: 31%;">Without ContextOS</th>
+          <th style="width: 31%;">With ContextOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>New session</td><td>10-15 min re-explaining</td><td>0 min. Loads automatically</td></tr>
+        <tr><td>First draft</td><td>Generic. Stranger wrote it</td><td>Sounds like you</td></tr>
+        <tr><td>Corrections</td><td>Gone tomorrow</td><td>Skill file updates permanently</td></tr>
+        <tr><td>Quality over time</td><td>Flat. Same as day one</td><td>Compounds every week</td></tr>
+        <tr><td>Multiple voices</td><td>Bleed into each other</td><td>Separate files. Never mixed</td></tr>
+        <tr><td>Content</td><td>One piece at a time</td><td>Batched drafts. Edit, not create</td></tr>
+        <tr><td>Tools</td><td>Copy-paste between windows</td><td>Direct Drive, Notion, Slack access</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- WHO THIS IS FOR -->
+<!-- ================================ -->
+<section class="for-section">
+  <div class="container-wide">
+    <h2>For people who use AI to do real work, every day.</h2>
+
+    <div class="for-grid">
+      <div class="for-col reveal reveal-delay-1">
+        <h3><span class="icon-yes">&check;</span> Built for</h3>
+        <div class="for-item"><strong>Marketers managing multiple brands.</strong> Separate voices that never bleed.</div>
+        <div class="for-item"><strong>Solo operators with a full-time job.</strong> Every session produces real output from message one.</div>
+        <div class="for-item"><strong>Notion and database managers.</strong> Claude navigates your systems and works with your actual data.</div>
+        <div class="for-item"><strong>Daily content creators.</strong> Consistent voice without writing from scratch every time.</div>
+        <div class="for-item"><strong>Anyone who struggles with focus.</strong> A system that plans, tracks, and flags drift.</div>
+      </div>
+      <div class="for-col reveal reveal-delay-2">
+        <h3><span class="icon-no">&times;</span> Not for</h3>
+        <div class="for-item"><strong>Casual AI users.</strong> If you do not use AI daily, you will not see the value.</div>
+        <div class="for-item"><strong>People who want AI to think for them.</strong> You still edit, approve, and direct.</div>
+        <div class="for-item"><strong>People happy with generic output.</strong> If "good enough" works for you, save your money.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- THE MATH -->
+<!-- ================================ -->
+<section class="math-section">
+  <div class="container-wide">
+    <h2>The time you are losing right now.</h2>
+
+    <div class="math-grid">
+      <div class="math-card reveal reveal-delay-1">
+        <div class="num">10-15</div>
+        <div class="unit">min / session wasted</div>
+        <p>Re-explaining context a proper system loads in zero seconds.</p>
+      </div>
+      <div class="math-card reveal reveal-delay-2">
+        <div class="num">30+</div>
+        <div class="unit">min / piece rewriting</div>
+        <p>Generic output rewritten from scratch vs. light edits with ContextOS.</p>
+      </div>
+      <div class="math-card reveal reveal-delay-3">
+        <div class="num">5-8</div>
+        <div class="unit">hours / month recovered</div>
+        <p>Hours back for real thinking, creating, and strategic work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- OFFER TIERS -->
+<!-- ================================ -->
+<section class="offer-section" id="offer">
+  <div class="container-wide">
+    <div style="text-align: center; margin-bottom: 16px;">
+      <span class="tag-label" style="display: inline-block;">Choose your path</span>
+    </div>
+    <h2 style="text-align: center;">Three ways to get ContextOS.</h2>
+
+    <div class="offer-grid">
+      <div class="offer-card reveal reveal-delay-1">
+        <div class="tier-label">Self-build</div>
+        <h3>Template + Guide</h3>
+        <div class="price" style="color: var(--black);">$97</div>
+        <p class="desc">Every template, the Day One Master Prompt, and a step-by-step guide. You build it yourself.</p>
+        <ul class="feature-list">
+          <li>All context file templates</li>
+          <li>Skill file templates</li>
+          <li>Day One Master Prompt</li>
+          <li>Feedback engine setup guide</li>
+          <li>Weekly planning template</li>
+          <li>Step-by-step customization guide</li>
+        </ul>
+        <a href="#" class="btn-primary" style="background: transparent; color: var(--black); border: 1px solid var(--gray-light); width: 100%; text-align: center;">Get the templates</a>
+      </div>
+
+      <div class="offer-card featured reveal reveal-delay-2">
+        <div class="tier-label">Done for you</div>
+        <h3>Full Build</h3>
+        <div class="price">$497</div>
+        <p class="desc">You answer the questions. I build your entire system. Every file, every skill, the workspace audit. Ready to paste and run.</p>
+        <ul class="feature-list">
+          <li>Everything in Template + Guide</li>
+          <li>Custom-built for your work</li>
+          <li>Workspace audit included</li>
+          <li>Database documentation</li>
+          <li>First week of content drafted</li>
+          <li>Ready to paste and run</li>
+        </ul>
+        <a href="#" class="btn-primary" style="width: 100%; text-align: center;">Book your build</a>
+      </div>
+
+      <div class="offer-card reveal reveal-delay-3">
+        <div class="tier-label">Full service</div>
+        <h3>Build + 4 Weeks</h3>
+        <div class="price" style="color: var(--black);">$1,997</div>
+        <p class="desc">Full build plus four weeks of active feedback optimization. System calibrated through real use by day 30.</p>
+        <ul class="feature-list">
+          <li>Everything in Full Build</li>
+          <li>4 weeks feedback optimization</li>
+          <li>Skill files tuned through real output</li>
+          <li>Monthly review and cleanup</li>
+          <li>Direct access for questions</li>
+          <li>Fully calibrated by day 30</li>
+        </ul>
+        <a href="#" class="btn-primary" style="background: transparent; color: var(--black); border: 1px solid var(--gray-light); width: 100%; text-align: center;">Book full service</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- FAQ -->
+<!-- ================================ -->
+<section class="faq-section">
+  <div class="container">
+    <h2>Common questions.</h2>
+
+    <div style="margin-top: 48px;">
+      <div class="faq-item reveal">
+        <h4>Does this work with ChatGPT?</h4>
+        <p>ContextOS is built for Claude Desktop's Cowork feature. ChatGPT does not have an equivalent. The principles could adapt, but the full system runs on Claude.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>Do I need a paid Claude plan?</h4>
+        <p>Yes. Claude Pro ($20/month) minimum. Cowork is not available on the free tier.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>How long does setup take?</h4>
+        <p>About one hour total. 30-45 minutes answering questions. 20-30 minutes for the automated build.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>What if my work changes?</h4>
+        <p>Skill files update through feedback. New ones can be added anytime. Change jobs, pivot your business, the system recalibrates.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>How is this different from a custom GPT?</h4>
+        <p>Custom GPTs are static. Same on day one as month six. ContextOS has a feedback engine. It processes every correction into permanent skill updates. It compounds.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>What about Notion databases?</h4>
+        <p>ContextOS documents every database you manage. Entry formats, processes, the full system. Claude connects to Notion directly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- FINAL CTA -->
+<!-- ================================ -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Every week without this is another week of babysitting Claude.</h2>
+    <p>Same re-explanations. Same generic output. Same corrections that vanish tomorrow. One setup fixes all of it.</p>
+    <a href="#offer" class="btn-primary">Get ContextOS</a>
+  </div>
+</section>
+
+<!-- ================================ -->
+<!-- FOOTER -->
+<!-- ================================ -->
+<footer style="padding: 40px 24px; text-align: center; background: var(--black); border-top: 1px solid rgba(255,255,255,0.06);">
+  <p style="color: rgba(255,255,255,0.25); font-size: 0.75rem; margin: 0;">ContextOS. Built by Muddassir.</p>
+</footer>
+
+<!-- ================================ -->
+<!-- STICKY BAR -->
+<!-- ================================ -->
+<div class="sticky-bar" id="stickyBar">
+  <p>Turn Claude from a chatty intern into a real assistant.</p>
+  <a href="#offer" class="btn-primary">Get ContextOS</a>
+</div>
+
+<script>
+const stickyBar = document.getElementById('stickyBar');
+const hero = document.querySelector('.hero');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      stickyBar.classList.remove('visible');
+    } else {
+      stickyBar.classList.add('visible');
+    }
+  });
+}, { threshold: 0 });
+observer.observe(hero);
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
