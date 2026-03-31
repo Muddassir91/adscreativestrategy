@@ -1054,11 +1054,16 @@
       }
     }
 
-    function submitQuiz() {
+    async function submitQuiz() {
       const name = document.getElementById('firstName').value.trim();
       const email = document.getElementById('email').value.trim();
 
       if (!name || !email) return;
+
+      // Disable button and show loading
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerHTML = 'Analyzing your answers<span class="typing-dots"><span></span><span></span><span></span></span>';
 
       const data = {
         name: name,
@@ -1072,15 +1077,62 @@
         q7: document.getElementById('a7').value
       };
 
-      // TODO: Send to Make.com webhook
-      // fetch('YOUR_MAKE_WEBHOOK_URL', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(data)
-      // });
+      try {
+        // Score with Cloudflare Worker AI
+        const scoreResponse = await fetch('https://csos-scorer.m-a-rab2012.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
 
-      console.log('Quiz submission:', data);
+        const result = await scoreResponse.json();
+        console.log('Quiz result:', result);
 
+        // Update the done screen with their actual tier
+        const tierMap = {
+          'The Writer': 'Writer',
+          'The Student': 'Student',
+          'The Practitioner': 'Practitioner',
+          'The Strategist': 'Strategist'
+        };
+        const tierShort = tierMap[result.tier] || 'Student';
+
+        document.querySelector('.done-heading').textContent = 'You are: ' + result.tier + '.';
+        document.querySelector('.done-text').textContent = 'Your full Creative Strategy Profile is on the way to ' + email + '. Check your inbox in the next 5 minutes.';
+
+        // Highlight their tier in the done screen
+        document.querySelectorAll('.done-tier').forEach(el => {
+          el.classList.remove('mystery');
+          if (el.textContent.trim().toLowerCase() === tierShort.toLowerCase()) {
+            el.classList.add('mystery');
+          }
+        });
+        // Remove the "You: ???" tier
+        const mysteryTier = document.querySelector('.done-tier:last-child');
+        if (mysteryTier) mysteryTier.remove();
+
+        // TODO: Send to Bento
+        // Replace with your Bento API call to tag the subscriber
+        // fetch('YOUR_BENTO_ENDPOINT', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({
+        //     email: email,
+        //     name: name,
+        //     tier: result.tier,
+        //     score: result.total,
+        //     tag: 'csos-' + tierShort.toLowerCase()
+        //   })
+        // });
+
+      } catch (err) {
+        console.error('Scoring error:', err);
+        // If scoring fails, still show thank you screen
+        document.querySelector('.done-heading').textContent = 'Check your inbox.';
+        document.querySelector('.done-text').textContent = 'Your Creative Strategy Profile is being prepared and will be sent to ' + email + ' shortly.';
+      }
+
+      // Go to done screen
       document.getElementById('screen-8').classList.remove('active');
       current = 9;
       document.getElementById('screen-9').classList.add('active');
