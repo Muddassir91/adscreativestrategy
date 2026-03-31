@@ -983,6 +983,10 @@
           <span class="done-tier">Strategist</span>
           <span class="done-tier mystery">You: ???</span>
         </div>
+        <a id="downloadReport" href="#" class="btn btn-teal" style="display:none; margin-top: 24px; text-decoration: none; text-align: center;" target="_blank">
+          Download Your Full Report (PDF)
+          <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -1098,7 +1102,7 @@
         const tierShort = tierMap[result.tier] || 'Student';
 
         document.querySelector('.done-heading').textContent = 'You are: ' + result.tier + '.';
-        document.querySelector('.done-text').textContent = 'Your full Creative Strategy Profile is on the way to ' + email + '. Check your inbox in the next 5 minutes.';
+        document.querySelector('.done-text').textContent = 'Your full Creative Strategy Profile is ready. Download it below to see your level, your biggest gap, and what to focus on next.';
 
         // Highlight their tier in the done screen
         document.querySelectorAll('.done-tier').forEach(el => {
@@ -1111,25 +1115,22 @@
         const mysteryTier = document.querySelector('.done-tier:last-child');
         if (mysteryTier) mysteryTier.remove();
 
-        // TODO: Send to Bento
-        // Replace with your Bento API call to tag the subscriber
-        // fetch('YOUR_BENTO_ENDPOINT', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({
-        //     email: email,
-        //     name: name,
-        //     tier: result.tier,
-        //     score: result.total,
-        //     tag: 'csos-' + tierShort.toLowerCase()
-        //   })
-        // });
+        // Show download link for the matching PDF report
+        const pdfMap = {
+          'Writer': 'CSOS_Report_The_Writer.pdf',
+          'Student': 'CSOS_Report_The_Student.pdf',
+          'Practitioner': 'CSOS_Report_The_Practitioner.pdf',
+          'Strategist': 'CSOS_Report_The_Strategist.pdf'
+        };
+        const downloadBtn = document.getElementById('downloadReport');
+        downloadBtn.href = '/pdfs/' + pdfMap[tierShort];
+        downloadBtn.style.display = 'inline-flex';
 
       } catch (err) {
         console.error('Scoring error:', err);
         // If scoring fails, still show thank you screen
-        document.querySelector('.done-heading').textContent = 'Check your inbox.';
-        document.querySelector('.done-text').textContent = 'Your Creative Strategy Profile is being prepared and will be sent to ' + email + ' shortly.';
+        document.querySelector('.done-heading').textContent = 'Something went wrong.';
+        document.querySelector('.done-text').textContent = 'We couldn\'t score your quiz right now. Please try again in a few minutes.';
       }
 
       // Go to done screen
