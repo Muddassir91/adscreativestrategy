@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Creative Strategy Profile: The Strategist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --black: #0a0a0a;
+      --teal: #0f766e;
+      --teal-light: #14b8a6;
+      --teal-bg: #f0fdfa;
+      --muted: #71717a;
+      --light: #f4f4f5;
+      --border: #e4e4e7;
+      --red: #ef4444;
+      --red-bg: #fef2f2;
+      --amber: #f59e0b;
+      --amber-bg: #fffbeb;
+      --green: #22c55e;
+      --green-bg: #f0fdf4;
+      --font: 'Inter', -apple-system, sans-serif;
+      --heading: 'Archivo', sans-serif;
+    }
+
+    html { font-size: 16px; }
+    body { font-family: var(--font); background: var(--white); color: var(--black); -webkit-font-smoothing: antialiased; line-height: 1.7; }
+
+    @media print {
+      .page { page-break-after: always; min-height: auto; }
+      .page:last-child { page-break-after: avoid; }
+    }
+    @page { margin: 0.5in; size: letter; }
+
+    .page {
+      min-height: 100vh;
+      padding: 80px 40px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 640px) { .page { padding: 48px 20px; } }
+
+    /* --- Cover --- */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 100px;
+    }
+
+    .cover-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 40px;
+    }
+
+    .grade-wrap {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .grade {
+      font-size: clamp(6rem, 18vw, 10rem);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 0.8;
+      color: var(--black);
+    }
+
+    .grade-badge {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--black);
+      padding: 8px 18px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .cover h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .cover-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 440px;
+    }
+
+    .tier-dots {
+      display: flex;
+      gap: 8px;
+      margin-top: 48px;
+    }
+
+    .tier-dots span {
+      width: 72px;
+      height: 10px;
+      border-radius: 5px;
+      background: var(--border);
+    }
+
+    .tier-dots span.on {
+      background: var(--teal);
+    }
+
+    .tier-dots-label {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tier-dots-label span {
+      width: 72px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .tier-dots-label span.on {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* --- Section Headers --- */
+    .section-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .section-num {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    h2 .teal { color: var(--teal); }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      margin-top: 28px;
+    }
+
+    p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { font-weight: 700; color: var(--black); }
+    .text-muted { color: var(--muted); }
+
+    /* --- Skill Breakdown Bars --- */
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 32px 0;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 170px 1fr 52px;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--light);
+    }
+
+    @media (max-width: 540px) {
+      .skill-row { grid-template-columns: 120px 1fr 40px; gap: 12px; }
+    }
+
+    .skill-row:last-child { border-bottom: none; }
+
+    .skill-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .skill-bar {
+      height: 16px;
+      background: var(--light);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.8s ease;
+    }
+
+    .skill-fill.low { background: var(--red); }
+    .skill-fill.mid { background: var(--amber); }
+    .skill-fill.high { background: var(--teal); }
+
+    .skill-score {
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .skill-score.low { color: var(--red); }
+    .skill-score.mid { color: var(--amber); }
+    .skill-score.high { color: var(--teal); }
+
+    /* --- Stat Cards --- */
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    @media (max-width: 540px) {
+      .stat-row { grid-template-columns: 1fr; }
+    }
+
+    .stat-card {
+      padding: 28px 20px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .stat-card.red { background: var(--red-bg); }
+    .stat-card.amber { background: var(--amber-bg); }
+    .stat-card.green { background: var(--green-bg); }
+
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-card.red .stat-num { color: var(--red); }
+    .stat-card.amber .stat-num { color: var(--amber); }
+    .stat-card.green .stat-num { color: var(--green); }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    /* --- Black Callout --- */
+    .callout {
+      background: var(--black);
+      color: var(--white);
+      padding: 40px;
+      border-radius: 16px;
+      margin: 32px 0;
+    }
+
+    .callout .tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .callout p {
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    /* --- Comparison Table --- */
+    .compare {
+      margin: 28px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .compare-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--light);
+    }
+
+    .compare-header span {
+      padding: 12px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .compare-header span:last-child {
+      color: var(--teal);
+      background: var(--teal-bg);
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--light);
+    }
+
+    .compare-row div {
+      padding: 16px 24px;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .compare-row div:last-child {
+      background: var(--teal-bg);
+      color: var(--teal);
+      font-weight: 500;
+    }
+
+    /* --- Bullet List --- */
+    .bullets {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .bullets li {
+      padding: 10px 0 10px 32px;
+      position: relative;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .bullets li:last-child { border-bottom: none; }
+
+    .bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    .bullets.teal li::before { background: var(--teal-bg); border: 2px solid var(--teal); }
+    .bullets.red li::before { background: var(--red-bg); border: 2px solid var(--red); }
+
+    /* --- Level Up Cards --- */
+    .level-up {
+      margin: 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .lu-card {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 24px;
+      padding: 28px;
+      background: var(--light);
+      border-radius: 16px;
+      align-items: start;
+    }
+
+    .lu-icon {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 900;
+      background: var(--white);
+      border-radius: 14px;
+      color: var(--teal);
+      border: 2px solid var(--teal);
+    }
+
+    .lu-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+    }
+
+    .lu-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .lu-card .unlock {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+    }
+
+    /* --- Progress to Next Level --- */
+    .next-level {
+      background: var(--teal-bg);
+      border: 2px solid var(--teal);
+      border-radius: 16px;
+      padding: 40px;
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .next-level .nl-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .next-level h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 0 0 4px 0;
+    }
+
+    .next-level p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .nl-bar {
+      width: 100%;
+      height: 18px;
+      background: var(--white);
+      border-radius: 9px;
+      overflow: hidden;
+      margin: 20px 0 10px;
+    }
+
+    .nl-fill {
+      height: 100%;
+      background: var(--teal);
+      border-radius: 6px;
+    }
+
+    .nl-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* --- Divider --- */
+    .divider {
+      width: 40px;
+      height: 4px;
+      background: var(--teal);
+      border-radius: 2px;
+      margin: 40px 0;
+    }
+
+    /* --- Full-bleed Teal Section --- */
+    .page.teal-bg {
+      background: var(--teal);
+      color: var(--white);
+      max-width: 100%;
+      padding: 80px 40px;
+    }
+
+    .page.teal-bg .inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .page.teal-bg h2 {
+      color: var(--white);
+    }
+
+    .page.teal-bg h2 .white { color: var(--white); opacity: 0.6; }
+
+    .page.teal-bg p {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .page.teal-bg .section-tag {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .page.teal-bg .section-num {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .page.teal-bg .compare {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .page.teal-bg .compare-header {
+      background: rgba(0,0,0,0.15);
+    }
+
+    .page.teal-bg .compare-header span {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .page.teal-bg .compare-header span:last-child {
+      color: var(--white);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .page.teal-bg .compare-row {
+      border-top-color: rgba(255,255,255,0.1);
+    }
+
+    .page.teal-bg .compare-row div {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .page.teal-bg .compare-row div:last-child {
+      background: rgba(0,0,0,0.1);
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .page.teal-bg strong {
+      color: var(--white);
+    }
+
+    /* --- Highlighted Skill Cards (for 5 skills page) --- */
+    .skill-card {
+      background: var(--light);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--red);
+    }
+
+    .skill-card.emerging {
+      border-left-color: var(--amber);
+    }
+
+    .skill-card.strong {
+      border-left-color: var(--teal);
+    }
+
+    .skill-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+    }
+
+    .skill-card .skill-level {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .skill-card .skill-level.low {
+      background: var(--red-bg);
+      color: var(--red);
+    }
+
+    .skill-card .skill-level.mid {
+      background: var(--amber-bg);
+      color: var(--amber);
+    }
+
+    .skill-card .skill-level.high {
+      background: var(--teal-bg);
+      color: var(--teal);
+    }
+
+    .skill-card p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    /* --- Heading Font --- */
+    h1, h2, h3, .grade, .grade-badge, .cover-label, .section-tag, .section-num, .stat-num {
+      font-family: var(--heading);
+    }
+
+    /* --- Reveal on Scroll --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* --- Cover Animations --- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .cover .cover-label { animation: fadeInUp 0.6s ease 0.1s forwards; opacity: 0; }
+    .cover .grade { animation: fadeInUp 0.6s ease 0.2s forwards; opacity: 0; }
+    .cover .grade-badge { animation: fadeInUp 0.6s ease 0.3s forwards; opacity: 0; }
+    .cover h1 { animation: fadeInUp 0.6s ease 0.4s forwards; opacity: 0; }
+    .cover .cover-sub { animation: fadeInUp 0.6s ease 0.5s forwards; opacity: 0; }
+    .cover .tier-dots { animation: fadeInUp 0.6s ease 0.6s forwards; opacity: 0; }
+    .cover .tier-dots-label { animation: fadeInUp 0.6s ease 0.65s forwards; opacity: 0; }
+
+    /* --- Skill Bar Animation --- */
+    .skill-fill {
+      width: 0 !important;
+      transition: width 1s ease 0.3s;
+    }
+    .skill-fill.animate {
+      /* width gets set back to original via JS */
+    }
+
+    /* --- Skill Card Hover --- */
+    .skill-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .skill-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    /* --- Progress Bar Animation --- */
+    .nl-fill {
+      width: 0%;
+      transition: width 1.2s ease;
+    }
+
+    /* --- VS Block (Strategist-specific) --- */
+    .vs { margin: 32px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 14px; overflow: hidden; }
+    .vs-col { padding: 32px; }
+    .vs-col:first-child { background: rgba(0,0,0,0.12); }
+    .vs-col:last-child { background: rgba(0,0,0,0.2); }
+    .vs-label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; color: rgba(255,255,255,0.5); }
+    .vs-col:last-child .vs-label { color: rgba(255,255,255,0.7); }
+    .vs-text { font-size: 1.05rem; line-height: 1.6; color: rgba(255,255,255,0.85); }
+    .vs-col:last-child .vs-text { color: var(--white); font-weight: 500; }
+    @media (max-width: 540px) { .vs { grid-template-columns: 1fr; } }
+
+    /* --- Footer --- */
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== PAGE 1: COVER ========== -->
+  <div class="page cover">
+    <div class="cover-label">Your Creative Strategy Profile</div>
+    <div class="grade-wrap">
+      <div class="grade">A-</div>
+    </div>
+    <div class="grade-badge">Level 4 of 4</div>
+    <h1>The Strategist.</h1>
+    <p class="cover-sub">You already think like a strategist. You research, hypothesize, brief, test, iterate. The system works. Now it's time people see it.</p>
+    <div class="tier-dots">
+      <span class="on"></span>
+      <span class="on"></span>
+      <span class="on"></span>
+      <span class="on"></span>
+    </div>
+    <div class="tier-dots-label">
+      <span class="on">Writer</span>
+      <span class="on">Student</span>
+      <span class="on">Practitioner</span>
+      <span class="on">Strategist</span>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 2: SCORE BREAKDOWN ========== -->
+  <div class="page reveal">
+    <div class="section-tag">Score Breakdown</div>
+    <div class="section-num">01</div>
+    <h2>How you scored.</h2>
+    <p class="text-muted">We looked at your answers across 5 creative strategy skills. Here's the picture.</p>
+
+    <div class="skills-grid reveal">
+      <div class="skill-row">
+        <span class="skill-name">Research</span>
+        <div class="skill-bar"><div class="skill-fill high" style="width: 95%"></div></div>
+        <span class="skill-score high">4/4</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Data Analysis</span>
+        <div class="skill-bar"><div class="skill-fill high" style="width: 90%"></div></div>
+        <span class="skill-score high">4/4</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Creative Briefing</span>
+        <div class="skill-bar"><div class="skill-fill high" style="width: 75%"></div></div>
+        <span class="skill-score high">3/4</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Hypothesis Thinking</span>
+        <div class="skill-bar"><div class="skill-fill high" style="width: 95%"></div></div>
+        <span class="skill-score high">4/4</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Iteration</span>
+        <div class="skill-bar"><div class="skill-fill high" style="width: 80%"></div></div>
+        <span class="skill-score high">3/4</span>
+      </div>
+    </div>
+
+    <div class="stat-row reveal">
+      <div class="stat-card red">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Need work</div>
+      </div>
+      <div class="stat-card amber">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Emerging</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Dialed in</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 3: WHERE YOU ARE ========== -->
+  <div class="page reveal">
+    <div class="section-tag">Where You Are</div>
+    <div class="section-num">02</div>
+    <h2>You think in systems. <span class="teal">That's rare in this field.</span></h2>
+    <p>Your answers were precise. You sequenced your thinking. You considered second-order effects. When a hypothesis failed, you didn't panic -- you checked the variables and formed the next one. Most people skip all of that.</p>
+
+    <div class="callout reveal">
+      <span class="tag">The real problem</span>
+      <p>You're already doing strategy-level work. The gap isn't in your skill set. It's in who knows about it. Does anyone outside your current client list have any idea what you actually do?</p>
+    </div>
+
+    <h3>Where value is slipping through</h3>
+    <ul class="bullets red reveal">
+      <li>You still call yourself a copywriter in some rooms</li>
+      <li>Your LinkedIn says "freelance creative" instead of "creative strategist"</li>
+      <li>Your proposals open with writing samples, not strategic thinking</li>
+      <li>Your case studies show what you wrote, not what you decided</li>
+      <li>Your process has no name -- so clients can't buy into it</li>
+    </ul>
+  </div>
+
+  <!-- ========== PAGE 4: WHAT THIS MEANS ========== -->
+  <div class="page teal-bg reveal">
+    <div class="inner">
+    <div class="section-tag">What This Means</div>
+    <div class="section-num">03</div>
+    <h2>Your bottleneck isn't skill. <span class="white">It's how you're seen.</span></h2>
+
+    <div class="vs">
+      <div class="vs-col">
+        <div class="vs-label">What the market sees</div>
+        <div class="vs-text">"They wrote a good ad."</div>
+      </div>
+      <div class="vs-col">
+        <div class="vs-label">What you actually did</div>
+        <div class="vs-text">"Researched the audience across 3 sources. Found the belief shift competitors missed. Built the hypothesis. Wrote the brief. Ran the test. Iterated."</div>
+      </div>
+    </div>
+
+    <p><strong>If you don't name that process, you get paid for the ad. If you do, you get paid for the thinking behind it.</strong></p>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 5: THE 5 SKILLS EXPLAINED ========== -->
+  <div class="page reveal">
+    <div class="section-tag">The 5 Core Skills</div>
+    <div class="section-num">04</div>
+    <h2>What creative strategy <span class="teal">is made of.</span></h2>
+    <p class="text-muted">These 5 skills separate people who write from people who think. Here's where you stand on each one.</p>
+
+    <div class="skill-card strong reveal">
+      <span class="skill-level high">Dialed in</span>
+      <h3>1. Research</h3>
+      <p>You pull VOC data from multiple sources and organize what you find. Your research feeds your creative decisions -- it's not decoration, it's the foundation.</p>
+    </div>
+
+    <div class="skill-card strong reveal">
+      <span class="skill-level high">Dialed in</span>
+      <h3>2. Data Analysis</h3>
+      <p>You read the full story in the numbers. You isolate variables, check for confounding factors, and pull funnel-level insights -- not just ad-level ones.</p>
+    </div>
+
+    <div class="skill-card strong reveal">
+      <span class="skill-level high">Dialed in</span>
+      <h3>3. Creative Briefing</h3>
+      <p>Your briefs are strategic documents: insight, hypothesis, hook direction, test variable. There's room to standardize the format, but the thinking is there.</p>
+    </div>
+
+    <div class="skill-card strong reveal">
+      <span class="skill-level high">Dialed in</span>
+      <h3>4. Hypothesis Thinking</h3>
+      <p>You think in testable terms. When something fails, you update the model and form the next hypothesis. This is your sharpest edge.</p>
+    </div>
+
+    <div class="skill-card strong reveal">
+      <span class="skill-level high">Dialed in</span>
+      <h3>5. Iteration</h3>
+      <p>You know the difference between angle rotation and creative rotation. You know when to iterate and when to start fresh. A documented playbook would make this compound faster.</p>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 6: LEVEL UP ========== -->
+  <div class="page reveal">
+    <div class="section-tag">Level Up</div>
+    <div class="section-num">05</div>
+    <h2>Make the work <span class="teal">visible.</span></h2>
+
+    <div class="callout reveal">
+      <span class="tag">Top of the spectrum</span>
+      <p>You don't need to get better. You need to get seen.</p>
+    </div>
+
+    <div class="level-up">
+      <div class="lu-card reveal reveal-delay-1">
+        <div class="lu-icon">01</div>
+        <div>
+          <h3>Rewrite your positioning</h3>
+          <p>Drop "copywriter" from your bio. Lead with what you do: "I research audiences, form creative hypotheses, and build testing frameworks that scale ad performance."</p>
+          <span class="unlock">+ Opens the door to visibility</span>
+        </div>
+      </div>
+      <div class="lu-card reveal reveal-delay-2">
+        <div class="lu-icon">02</div>
+        <div>
+          <h3>Publish your thinking</h3>
+          <p>Write one case study that shows your decisions, not your deliverables. Research to hypothesis to brief to result. Show the thinking. That's what commands $150+/hour.</p>
+          <span class="unlock">+ Builds authority</span>
+        </div>
+      </div>
+      <div class="lu-card reveal reveal-delay-3">
+        <div class="lu-icon">03</div>
+        <div>
+          <h3>Name your process</h3>
+          <p>Give your system a name. Frame it as a 5-step method. Put it in proposals, on LinkedIn, in conversations. Named processes feel proprietary -- and clients pay more for them.</p>
+          <span class="unlock">+ Creates intellectual property</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 7: WHAT'S NEXT ========== -->
+  <div class="page reveal">
+    <div class="section-tag">What's Next</div>
+    <div class="section-num">06</div>
+    <h2>You scored at the top.<br><span class="teal">You know your stuff.</span></h2>
+
+    <p>So let's skip the part where I explain what creative strategy is. You live it.</p>
+
+    <p>Tomorrow, your daily emails start. And because you landed in the Strategist tier, yours are going to look different from what the other tiers get. We're going deeper:</p>
+
+    <ul class="bullets teal reveal">
+      <li><strong>Positioning:</strong> How to reframe the way you talk about yourself so the market sees what you actually do -- not just the output</li>
+      <li><strong>Creative leadership:</strong> How to present your process to clients before you show them work, so they see the thinking, not just the ad</li>
+      <li><strong>Building IP from your process:</strong> Your repeatable method is intellectual property. We'll talk about naming it, documenting it, and making it the thing people hire you for</li>
+    </ul>
+
+    <div class="callout reveal">
+      <span class="tag">One thing before we start</span>
+      <p>Reply to your first email with the word <strong>STRATEGIST</strong> and tell me this: if you had to name your creative strategy process and pitch it in one sentence, what would you call it? I read every reply. And yes, I'll tell you if the name sucks.</p>
+    </div>
+
+    <div class="footer-bar">
+      <span>Creative Strategy Operating System</span>
+      <span>Level 4: The Strategist</span>
+    </div>
+  </div>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObserver.observe(el));
+
+// Animate skill bars
+const skillBars = document.querySelectorAll('.skill-fill');
+const barData = [];
+skillBars.forEach(bar => {
+  barData.push({ el: bar, width: bar.style.width });
+  bar.style.width = '0%';
+});
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const data = barData.find(d => d.el === entry.target);
+      if (data) entry.target.style.width = data.width;
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+skillBars.forEach(bar => barObserver.observe(bar));
+
+// Animate nl-fill progress bars
+const nlBars = document.querySelectorAll('.nl-fill');
+const nlData = [];
+nlBars.forEach(bar => {
+  nlData.push({ el: bar, width: bar.style.width });
+  bar.style.width = '0%';
+});
+const nlObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const data = nlData.find(d => d.el === entry.target);
+      if (data) entry.target.style.width = data.width;
+      nlObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+nlBars.forEach(bar => nlObserver.observe(bar));
+</script>
+
+</body>
+</html>

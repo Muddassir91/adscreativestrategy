@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Creative Strategy Profile: The Practitioner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --black: #0a0a0a;
+      --teal: #0f766e;
+      --teal-light: #14b8a6;
+      --teal-bg: #f0fdfa;
+      --muted: #71717a;
+      --light: #f4f4f5;
+      --border: #e4e4e7;
+      --red: #ef4444;
+      --red-bg: #fef2f2;
+      --amber: #f59e0b;
+      --amber-bg: #fffbeb;
+      --green: #22c55e;
+      --green-bg: #f0fdf4;
+      --font: 'Inter', -apple-system, sans-serif;
+      --heading: 'Archivo', sans-serif;
+    }
+
+    html { font-size: 16px; }
+    body { font-family: var(--font); background: var(--white); color: var(--black); -webkit-font-smoothing: antialiased; line-height: 1.7; }
+
+    @media print {
+      .page { page-break-after: always; min-height: auto; }
+      .page:last-child { page-break-after: avoid; }
+    }
+    @page { margin: 0.5in; size: letter; }
+
+    .page {
+      min-height: 100vh;
+      padding: 80px 40px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 640px) { .page { padding: 48px 20px; } }
+
+    /* --- Cover --- */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 100px;
+    }
+
+    .cover-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 40px;
+    }
+
+    .grade-wrap {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .grade {
+      font-size: clamp(6rem, 18vw, 10rem);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 0.8;
+      color: var(--black);
+    }
+
+    .grade-badge {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--black);
+      padding: 8px 18px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .cover h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .cover-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 440px;
+    }
+
+    .tier-dots {
+      display: flex;
+      gap: 8px;
+      margin-top: 48px;
+    }
+
+    .tier-dots span {
+      width: 72px;
+      height: 10px;
+      border-radius: 5px;
+      background: var(--border);
+    }
+
+    .tier-dots span.on {
+      background: var(--teal);
+    }
+
+    .tier-dots-label {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tier-dots-label span {
+      width: 72px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .tier-dots-label span.on {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* --- Section Headers --- */
+    .section-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .section-num {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    h2 .teal { color: var(--teal); }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      margin-top: 28px;
+    }
+
+    p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { font-weight: 700; color: var(--black); }
+    .text-muted { color: var(--muted); }
+
+    /* --- Skill Breakdown Bars --- */
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 32px 0;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 170px 1fr 52px;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--light);
+    }
+
+    @media (max-width: 540px) {
+      .skill-row { grid-template-columns: 120px 1fr 40px; gap: 12px; }
+    }
+
+    .skill-row:last-child { border-bottom: none; }
+
+    .skill-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .skill-bar {
+      height: 16px;
+      background: var(--light);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.8s ease;
+    }
+
+    .skill-fill.low { background: var(--red); }
+    .skill-fill.mid { background: var(--amber); }
+    .skill-fill.high { background: var(--teal); }
+
+    .skill-score {
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .skill-score.low { color: var(--red); }
+    .skill-score.mid { color: var(--amber); }
+    .skill-score.high { color: var(--teal); }
+
+    /* --- Stat Cards --- */
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    @media (max-width: 540px) {
+      .stat-row { grid-template-columns: 1fr; }
+    }
+
+    .stat-card {
+      padding: 28px 20px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .stat-card.red { background: var(--red-bg); }
+    .stat-card.amber { background: var(--amber-bg); }
+    .stat-card.green { background: var(--green-bg); }
+
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-card.red .stat-num { color: var(--red); }
+    .stat-card.amber .stat-num { color: var(--amber); }
+    .stat-card.green .stat-num { color: var(--green); }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    /* --- Black Callout --- */
+    .callout {
+      background: var(--black);
+      color: var(--white);
+      padding: 40px;
+      border-radius: 16px;
+      margin: 32px 0;
+    }
+
+    .callout .tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .callout p {
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    /* --- Comparison Table --- */
+    .compare {
+      margin: 28px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .compare-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--light);
+    }
+
+    .compare-header span {
+      padding: 12px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .compare-header span:last-child {
+      color: var(--teal);
+      background: var(--teal-bg);
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--light);
+    }
+
+    .compare-row div {
+      padding: 16px 24px;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .compare-row div:last-child {
+      background: var(--teal-bg);
+      color: var(--teal);
+      font-weight: 500;
+    }
+
+    /* --- Bullet List --- */
+    .bullets {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .bullets li {
+      padding: 10px 0 10px 32px;
+      position: relative;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .bullets li:last-child { border-bottom: none; }
+
+    .bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    .bullets.teal li::before { background: var(--teal-bg); border: 2px solid var(--teal); }
+    .bullets.red li::before { background: var(--red-bg); border: 2px solid var(--red); }
+
+    /* --- Level Up Cards --- */
+    .level-up {
+      margin: 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .lu-card {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 24px;
+      padding: 28px;
+      background: var(--light);
+      border-radius: 16px;
+      align-items: start;
+    }
+
+    .lu-icon {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 900;
+      background: var(--white);
+      border-radius: 14px;
+      color: var(--teal);
+      border: 2px solid var(--teal);
+    }
+
+    .lu-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+    }
+
+    .lu-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .lu-card .unlock {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+    }
+
+    /* --- Progress to Next Level --- */
+    .next-level {
+      background: var(--teal-bg);
+      border: 2px solid var(--teal);
+      border-radius: 16px;
+      padding: 40px;
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .next-level .nl-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .next-level h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin: 0 0 4px 0;
+    }
+
+    .next-level p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .nl-bar {
+      width: 100%;
+      height: 18px;
+      background: var(--white);
+      border-radius: 9px;
+      overflow: hidden;
+      margin: 20px 0 10px;
+    }
+
+    .nl-fill {
+      height: 100%;
+      background: var(--teal);
+      border-radius: 6px;
+    }
+
+    .nl-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* --- Divider --- */
+    .divider {
+      width: 40px;
+      height: 4px;
+      background: var(--teal);
+      border-radius: 2px;
+      margin: 40px 0;
+    }
+
+    /* --- Full-bleed Teal Section --- */
+    .page.teal-bg {
+      background: var(--teal);
+      color: var(--white);
+      max-width: 100%;
+      padding: 80px 40px;
+    }
+
+    .page.teal-bg .inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .page.teal-bg h2 {
+      color: var(--white);
+    }
+
+    .page.teal-bg h2 .white { color: var(--white); opacity: 0.6; }
+
+    .page.teal-bg p {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .page.teal-bg .section-tag {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .page.teal-bg .section-num {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .page.teal-bg .compare {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .page.teal-bg .compare-header {
+      background: rgba(0,0,0,0.15);
+    }
+
+    .page.teal-bg .compare-header span {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .page.teal-bg .compare-header span:last-child {
+      color: var(--white);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .page.teal-bg .compare-row {
+      border-top-color: rgba(255,255,255,0.1);
+    }
+
+    .page.teal-bg .compare-row div {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .page.teal-bg .compare-row div:last-child {
+      background: rgba(0,0,0,0.1);
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .page.teal-bg strong {
+      color: var(--white);
+    }
+
+    /* --- Highlighted Skill Cards (for 5 skills page) --- */
+    .skill-card {
+      background: var(--light);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--red);
+    }
+
+    .skill-card.emerging {
+      border-left-color: var(--amber);
+    }
+
+    .skill-card.strong {
+      border-left-color: var(--teal);
+    }
+
+    .skill-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+    }
+
+    .skill-card .skill-level {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .skill-card .skill-level.low {
+      background: var(--red-bg);
+      color: var(--red);
+    }
+
+    .skill-card .skill-level.mid {
+      background: var(--amber-bg);
+      color: var(--amber);
+    }
+
+    .skill-card .skill-level.high {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .skill-card p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    /* --- Heading Font --- */
+    h1, h2, h3, .grade, .grade-badge, .cover-label, .section-tag, .section-num, .stat-num {
+      font-family: var(--heading);
+    }
+
+    /* --- Reveal on Scroll --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* --- Cover Animations --- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .cover .cover-label { animation: fadeInUp 0.6s ease 0.1s forwards; opacity: 0; }
+    .cover .grade { animation: fadeInUp 0.6s ease 0.2s forwards; opacity: 0; }
+    .cover .grade-badge { animation: fadeInUp 0.6s ease 0.3s forwards; opacity: 0; }
+    .cover h1 { animation: fadeInUp 0.6s ease 0.4s forwards; opacity: 0; }
+    .cover .cover-sub { animation: fadeInUp 0.6s ease 0.5s forwards; opacity: 0; }
+    .cover .tier-dots { animation: fadeInUp 0.6s ease 0.6s forwards; opacity: 0; }
+    .cover .tier-dots-label { animation: fadeInUp 0.6s ease 0.65s forwards; opacity: 0; }
+
+    /* --- Skill Bar Animation --- */
+    .skill-fill {
+      width: 0 !important;
+      transition: width 1s ease 0.3s;
+    }
+    .skill-fill.animate {
+      /* width gets set back to original via JS */
+    }
+
+    /* --- Skill Card Hover --- */
+    .skill-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .skill-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    /* --- Progress Bar Animation --- */
+    .nl-fill {
+      width: 0%;
+      transition: width 1.2s ease;
+    }
+
+    /* --- Footer --- */
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== PAGE 1: COVER ========== -->
+  <div class="page cover">
+    <div class="cover-label">Your Creative Strategy Profile</div>
+    <div class="grade-wrap">
+      <div class="grade">B</div>
+    </div>
+    <div class="grade-badge">Level 3 of 4</div>
+    <h1>The Practitioner.</h1>
+    <p class="cover-sub">You've got the chops. Research, briefs, data -- you do all of it. But you reinvent the wheel every time, and your wins vanish into thin air.</p>
+    <div class="tier-dots">
+      <span class="on"></span>
+      <span class="on"></span>
+      <span class="on"></span>
+      <span></span>
+    </div>
+    <div class="tier-dots-label">
+      <span class="on">Writer</span>
+      <span class="on">Student</span>
+      <span class="on">Practitioner</span>
+      <span>Strategist</span>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 2: SCORE BREAKDOWN ========== -->
+  <div class="page reveal">
+    <div class="section-tag">Score Breakdown</div>
+    <div class="section-num">01</div>
+    <h2>Here's how you did.</h2>
+    <p class="text-muted">We broke your answers down across the 5 skills that matter most in creative strategy. Some are solid. Some need work.</p>
+
+    <div class="skills-grid reveal">
+      <div class="skill-row">
+        <span class="skill-name">Research</span>
+        <div class="skill-bar"><div class="skill-fill high" style="width: 70%"></div></div>
+        <span class="skill-score high">3/4</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Data Analysis</span>
+        <div class="skill-bar"><div class="skill-fill high" style="width: 65%"></div></div>
+        <span class="skill-score high">3/4</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Creative Briefing</span>
+        <div class="skill-bar"><div class="skill-fill mid" style="width: 45%"></div></div>
+        <span class="skill-score mid">2/4</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Hypothesis Thinking</span>
+        <div class="skill-bar"><div class="skill-fill high" style="width: 65%"></div></div>
+        <span class="skill-score high">3/4</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Iteration</span>
+        <div class="skill-bar"><div class="skill-fill mid" style="width: 40%"></div></div>
+        <span class="skill-score mid">2/4</span>
+      </div>
+    </div>
+
+    <div class="stat-row reveal">
+      <div class="stat-card red">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Skills to build</div>
+      </div>
+      <div class="stat-card amber">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Emerging</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Unlocked</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 3: WHERE YOU ARE ========== -->
+  <div class="page reveal">
+    <div class="section-tag">Where You Are</div>
+    <div class="section-num">02</div>
+    <h2>You can do the work. You just can't <span class="teal">bottle it.</span></h2>
+    <p>Look -- your answers were good. You knew where to pull research. You diagnosed before you prescribed. You got the difference between hook fatigue and angle fatigue. That's more than most people who put "creative strategist" in their bio. But you were sharp on some questions and jumped straight to tactics on others. The signal was inconsistent.</p>
+
+    <div class="callout reveal">
+      <span class="tag">Here's the gap</span>
+      <p>You've got the skill. What's missing is a system around it. A system means your research runs through the same framework every time. Your briefs follow the same bones. Right now, the quality of your work depends on how you're feeling that morning. A system takes your mood out of the equation.</p>
+    </div>
+
+    <h3>Where things get shaky</h3>
+    <ul class="bullets red reveal">
+      <li>Your research is solid, but you start from zero every time</li>
+      <li>Your briefs are good -- and different every single time</li>
+      <li>When something wins, you don't write down why</li>
+      <li>There's no testing playbook you carry from client to client</li>
+      <li>Every new project feels like day one</li>
+    </ul>
+  </div>
+
+  <!-- ========== PAGE 4: WHAT THIS MEANS ========== -->
+  <div class="page teal-bg reveal">
+    <div class="inner">
+    <div class="section-tag">What This Means</div>
+    <div class="section-num">03</div>
+    <h2>Talent without a system <span class="white">hits a wall.</span></h2>
+    <p>You've got the raw ability. But without something repeatable underneath it, every project starts fresh. Your best work stays trapped in the moment it happened -- it never builds on itself.</p>
+
+    <div class="compare reveal">
+      <div class="compare-header">
+        <span>Where you are now</span>
+        <span>Where you're headed</span>
+      </div>
+      <div class="compare-row">
+        <div>Research that looks different every time</div>
+        <div>One research framework you run on every project</div>
+      </div>
+      <div class="compare-row">
+        <div>Briefs that are good but never the same format</div>
+        <div>A brief template that keeps the quality locked in</div>
+      </div>
+      <div class="compare-row">
+        <div>Wins that disappear the second the project wraps</div>
+        <div>A playbook that captures every win and why it worked</div>
+      </div>
+      <div class="compare-row">
+        <div>Output that depends on how your day is going</div>
+        <div>A system that delivers even when you're off</div>
+      </div>
+      <div class="compare-row">
+        <div>Explaining what you do a different way each time</div>
+        <div>Naming your process in two minutes flat</div>
+      </div>
+    </div>
+
+    <p><strong>The gap is not skill.</strong> You have the skill. The gap is that everything lives in your head. On a good day, you're great. On a bad day, you wing it. A system means your worst day still produces solid work.</p>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 5: THE 5 SKILLS EXPLAINED ========== -->
+  <div class="page reveal">
+    <div class="section-tag">The 5 Core Skills</div>
+    <div class="section-num">04</div>
+    <h2>The 5 skills that <span class="teal">actually matter.</span></h2>
+    <p class="text-muted">These are the things that separate someone who does the work from someone who owns a system. Here's where you're strong and where things break down.</p>
+
+    <div class="skill-card strong reveal">
+      <span class="skill-level high">Unlocked</span>
+      <h3>1. Research</h3>
+      <p>You go to the right places -- Amazon reviews, Reddit threads, Ad Library. You dig for real customer language. The work is strong. It's just different every time you do it.</p>
+    </div>
+
+    <div class="skill-card strong reveal">
+      <span class="skill-level high">Unlocked</span>
+      <h3>2. Data Analysis</h3>
+      <p>You can look at the numbers and figure out what went wrong. You see the story in the data. But you're doing it off instinct, not a repeatable read.</p>
+    </div>
+
+    <div class="skill-card emerging reveal">
+      <span class="skill-level mid">Emerging</span>
+      <h3>3. Creative Briefing</h3>
+      <p>There's real insight in your briefs. But the structure changes every time, and when the structure shifts, the quality shifts with it.</p>
+    </div>
+
+    <div class="skill-card strong reveal">
+      <span class="skill-level high">Unlocked</span>
+      <h3>4. Hypothesis Thinking</h3>
+      <p>You think in testable bets, which is rare. But you don't always write them down, and you don't always build the next test off the last one.</p>
+    </div>
+
+    <div class="skill-card emerging reveal">
+      <span class="skill-level mid">Emerging</span>
+      <h3>5. Iteration</h3>
+      <p>You know when to keep going and when to kill something. But without a debrief habit, what you learn on one project never makes it to the next.</p>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 6: LEVEL UP ========== -->
+  <div class="page reveal">
+    <div class="section-tag">Level Up</div>
+    <div class="section-num">05</div>
+    <h2>How to reach <span class="teal">The Strategist.</span></h2>
+    <p>Going from Practitioner to Strategist comes down to one thing: wrapping a system around what you already know. You don't need to learn more. You need to make what you know repeatable.</p>
+
+    <div class="next-level reveal">
+      <div class="nl-label">Progress to next level</div>
+      <h3>The Strategist (A-)</h3>
+      <p>2 skills to go</p>
+      <div class="nl-bar"><div class="nl-fill" style="width: 75%"></div></div>
+      <div class="nl-meta">
+        <span>The Practitioner (B)</span>
+        <span>The Strategist (A-)</span>
+      </div>
+    </div>
+
+    <div class="level-up">
+      <div class="lu-card reveal reveal-delay-1">
+        <div class="lu-icon">01</div>
+        <div>
+          <h3>Build a research template</h3>
+          <p>One doc, three sections: voice of customer (love/hate/fear), competitor teardown (hooks/angles/formats), audience patterns. Use it on three projects. Tweak it after each one.</p>
+          <span class="unlock">+ Makes research repeatable</span>
+        </div>
+      </div>
+      <div class="lu-card reveal reveal-delay-2">
+        <div class="lu-icon">02</div>
+        <div>
+          <h3>Start a debrief habit</h3>
+          <p>After every win, write one page: what you guessed, what worked, who it worked on, what you'd try next. Do ten of these and you'll have a playbook nobody else has.</p>
+          <span class="unlock">+ Makes wins compound</span>
+        </div>
+      </div>
+      <div class="lu-card reveal reveal-delay-3">
+        <div class="lu-icon">03</div>
+        <div>
+          <h3>Lock in your brief format</h3>
+          <p>Pick a structure: customer insight, hypothesis, hook direction, test variable. Use that same skeleton every time. The content changes. The container doesn't.</p>
+          <span class="unlock">+ Makes quality consistent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 7: WHAT'S NEXT ========== -->
+  <div class="page reveal">
+    <div class="section-tag">What's Next</div>
+    <div class="section-num">06</div>
+    <h2>So you took the quiz.<br><span class="teal">And you're still reading.</span></h2>
+
+    <p>That tells me something. You scored well. You've got the skill. And you're the kind of person who doesn't just glance at a result and move on -- you want to know what to do with it.</p>
+
+    <p>Tomorrow, you'll get the first of a daily email from me. Each one picks up where this report left off -- one idea, one tool, one shift that helps you build the system around what you already know how to do.</p>
+
+    <ul class="bullets teal reveal">
+      <li><strong>Week 1:</strong> Turning your research process into something you can run in 30 minutes, not reinvent every time</li>
+      <li><strong>Week 2:</strong> Building a debrief habit so your wins stop disappearing after the project ends</li>
+      <li><strong>Week 3:</strong> Locking in a brief format so your output stops riding on whether you had coffee</li>
+      <li><strong>Week 4:</strong> Naming your process so you can talk about it, teach it, and own it</li>
+    </ul>
+
+    <div class="callout reveal">
+      <span class="tag">One thing before you go</span>
+      <p>Reply to tomorrow's email with the word PRACTITIONER and tell me: what's the one thing you wish you had a system for? Research? Briefs? Testing? Something else? I read every reply.</p>
+    </div>
+
+    <div class="footer-bar">
+      <span>Creative Strategy Operating System</span>
+      <span>Level 3: The Practitioner</span>
+    </div>
+  </div>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObserver.observe(el));
+
+// Animate skill bars
+const skillBars = document.querySelectorAll('.skill-fill');
+const barData = [];
+skillBars.forEach(bar => {
+  barData.push({ el: bar, width: bar.style.width });
+  bar.style.width = '0%';
+});
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const data = barData.find(d => d.el === entry.target);
+      if (data) entry.target.style.width = data.width;
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+skillBars.forEach(bar => barObserver.observe(bar));
+
+// Animate nl-fill progress bars
+const nlBars = document.querySelectorAll('.nl-fill');
+const nlData = [];
+nlBars.forEach(bar => {
+  nlData.push({ el: bar, width: bar.style.width });
+  bar.style.width = '0%';
+});
+const nlObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const data = nlData.find(d => d.el === entry.target);
+      if (data) entry.target.style.width = data.width;
+      nlObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+nlBars.forEach(bar => nlObserver.observe(bar));
+</script>
+
+</body>
+</html>
