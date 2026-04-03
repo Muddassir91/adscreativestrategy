@@ -1104,11 +1104,19 @@
 
       // Score in background - user already sees the wait screen
       try {
-        await fetch('https://csos-scorer.m-a-rab2012.workers.dev', {
+        const response = await fetch('https://csos-scorer.m-a-rab2012.workers.dev', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
+        const result = await response.json();
+
+        if (result.error === 'invalid_answers') {
+          document.querySelector('.done-heading').textContent = 'Nice try.';
+          document.querySelector('.done-text').textContent = 'We need real answers to build your profile. Go back and give it a real shot.';
+          document.querySelector('.done-sub').style.display = 'none';
+          document.querySelector('.done-note').style.display = 'none';
+        }
       } catch (err) {
         console.error('Scoring error:', err);
       }
