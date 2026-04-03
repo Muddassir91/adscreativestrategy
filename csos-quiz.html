@@ -2,8 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CSOS | Creative Strategy Skills Test</title>
+
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1569191080819717');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1569191080819717&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -33,6 +52,7 @@
       -webkit-font-smoothing: antialiased;
       overflow: hidden;
       height: 100dvh;
+      height: 100vh;
     }
 
     /* --- Animations --- */
@@ -58,15 +78,30 @@
       80%, 100% { opacity: 0.3; }
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes optionReveal {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes slideInRight {
-      0% { opacity: 0; transform: translateX(12px); }
-      100% { opacity: 1; transform: translateX(0); }
+    @keyframes selectPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    @keyframes warnFade {
+      0% { opacity: 0; transform: translateY(4px); }
+      15% { opacity: 1; transform: translateY(0); }
+      85% { opacity: 1; }
+      100% { opacity: 0; }
     }
 
     /* --- Logo --- */
@@ -117,7 +152,7 @@
       color: var(--gray);
     }
 
-    /* --- Question Counter (top right) --- */
+    /* --- Question Counter --- */
     .q-counter {
       position: fixed;
       top: 24px;
@@ -132,9 +167,7 @@
       transition: opacity 300ms ease;
     }
 
-    .q-counter.visible {
-      opacity: 1;
-    }
+    .q-counter.visible { opacity: 1; }
 
     /* --- Progress Bar --- */
     .progress {
@@ -162,13 +195,15 @@
       inset: 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      padding: 32px 24px;
+      padding: 80px 24px 100px;
       opacity: 0;
       transform: translateY(16px);
       pointer-events: none;
       transition: opacity 350ms ease, transform 350ms ease;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .screen.active {
@@ -179,7 +214,19 @@
 
     .screen-inner {
       width: 100%;
-      max-width: 580px;
+      max-width: 620px;
+      margin: auto 0;
+    }
+
+    /* Hook screen centered */
+    #screen-0 {
+      justify-content: center;
+      padding-top: 32px;
+    }
+
+    #screen-email, #screen-done {
+      justify-content: center;
+      padding-top: 32px;
     }
 
     /* --- Hook Screen --- */
@@ -220,9 +267,7 @@
       opacity: 0;
     }
 
-    .hook-text .teal {
-      color: var(--teal);
-    }
+    .hook-text .teal { color: var(--teal); }
 
     .hook-sub {
       font-size: 1.05rem;
@@ -239,7 +284,7 @@
       opacity: 0;
     }
 
-    /* --- Tier Preview on Hook --- */
+    /* --- Tier Preview --- */
     .tier-preview {
       display: flex;
       align-items: center;
@@ -329,6 +374,13 @@
       box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.25);
     }
 
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
     .btn-primary {
       background: var(--black);
       color: var(--white);
@@ -349,9 +401,7 @@
       box-shadow: 0 6px 20px rgba(15,118,110,0.3);
     }
 
-    .btn-primary:hover {
-      background: #1a1a1a;
-    }
+    .btn-primary:hover { background: #1a1a1a; }
 
     .btn-teal {
       background: var(--teal);
@@ -363,18 +413,31 @@
       box-shadow: 0 6px 20px rgba(15,118,110,0.25);
     }
 
+    .btn-teal:disabled:hover {
+      background: var(--teal);
+      box-shadow: none;
+      transform: none;
+    }
+
     .btn-arrow {
       width: 20px;
       height: 20px;
     }
 
-    /* --- Question Screens --- */
+    /* --- Question Card --- */
     .q-card {
       background: var(--white);
       border: 1px solid var(--gray-light);
       border-radius: 16px;
-      padding: 36px;
+      padding: 32px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04);
+    }
+
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
     .q-number {
@@ -384,7 +447,6 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--teal);
-      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -398,98 +460,161 @@
       border-radius: 1px;
     }
 
+    .q-difficulty {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-left: auto;
+    }
+
+    .q-difficulty.easy { background: #ecfdf5; color: #059669; }
+    .q-difficulty.medium { background: #fef3c7; color: #d97706; }
+    .q-difficulty.hard { background: #fef2f2; color: #dc2626; }
+
+    .q-scenario {
+      font-size: 0.92rem;
+      color: var(--gray-dark);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      padding: 14px 18px;
+      background: #f8fafc;
+      border-left: 3px solid var(--gray-light);
+      border-radius: 0 10px 10px 0;
+    }
+
     .q-text {
       font-family: var(--font-heading);
-      font-size: clamp(1.1rem, 3vw, 1.35rem);
+      font-size: clamp(1.05rem, 3vw, 1.25rem);
       font-weight: 700;
       line-height: 1.45;
       letter-spacing: -0.01em;
       color: var(--black);
-      margin-bottom: 10px;
-    }
-
-    .q-prompt {
-      font-family: var(--font-heading);
-      font-size: clamp(1.1rem, 3vw, 1.35rem);
-      font-weight: 700;
-      line-height: 1.45;
-      color: var(--teal);
       margin-bottom: 24px;
     }
 
-    .q-context {
-      font-size: 0.92rem;
-      color: var(--gray-dark);
-      line-height: 1.65;
-      margin-bottom: 24px;
-      padding: 16px 20px;
-      background: var(--teal-bg);
-      border-left: 3px solid var(--teal);
-      border-radius: 0 10px 10px 0;
-      font-style: italic;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 110px;
-      padding: 16px;
-      border: 2px solid var(--gray-light);
-      border-radius: 10px;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      color: var(--black);
-      line-height: 1.6;
-      resize: vertical;
-      transition: border-color 200ms ease, box-shadow 200ms ease;
-      background: #fafafa;
-    }
-
-    textarea::placeholder {
-      color: #9ca3af;
-    }
-
-    textarea:focus {
-      outline: none;
-      border-color: var(--teal);
-      box-shadow: 0 0 0 4px rgba(15,118,110,0.1);
-      background: var(--white);
-    }
-
-    .q-footer {
+    /* --- MCQ Options --- */
+    .options-grid {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 2px solid var(--gray-light);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 200ms ease;
+      background: var(--white);
+      position: relative;
+      animation: optionReveal 0.4s ease forwards;
+      opacity: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .option-card:nth-child(1) { animation-delay: 0.05s; }
+    .option-card:nth-child(2) { animation-delay: 0.1s; }
+    .option-card:nth-child(3) { animation-delay: 0.15s; }
+    .option-card:nth-child(4) { animation-delay: 0.2s; }
+
+    .option-card:hover {
+      border-color: #a7c7c4;
+      background: #fafffe;
+    }
+
+    .option-card.selected {
+      border-color: var(--teal);
+      background: var(--teal-bg);
+      animation: selectPop 0.3s ease;
+      box-shadow: 0 0 0 3px rgba(15,118,110,0.12);
+    }
+
+    .option-card.selected .option-letter {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+    }
+
+    .option-card.selected .option-text {
+      color: var(--black);
+      font-weight: 500;
+    }
+
+    .option-letter {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 2px solid var(--gray-light);
+      display: flex;
       align-items: center;
-      margin-top: 20px;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--gray);
+      transition: all 200ms ease;
+      margin-top: 1px;
     }
 
-    .q-hint {
-      font-size: 0.78rem;
-      color: #9ca3af;
-      font-style: italic;
+    .option-text {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--gray-dark);
+      padding-top: 4px;
     }
 
-    /* --- Mini Progress Dots (inside question cards) --- */
+    /* --- Mandatory answer warning --- */
+    .answer-warning {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #dc2626;
+      animation: warnFade 2.5s ease forwards;
+    }
+
+    .answer-warning.show { display: flex; }
+
+    .options-grid.shake {
+      animation: shake 0.4s ease;
+    }
+
+    /* --- Mini Progress Dots --- */
     .q-dots {
       display: flex;
-      gap: 6px;
-      margin-bottom: 24px;
+      gap: 5px;
+      margin-bottom: 20px;
     }
 
     .q-dot {
-      width: 28px;
+      flex: 1;
       height: 4px;
       border-radius: 2px;
       background: var(--gray-light);
       transition: background 300ms ease;
     }
 
-    .q-dot.done {
-      background: var(--teal);
-    }
-
+    .q-dot.done { background: var(--teal); }
     .q-dot.current {
       background: var(--teal-light);
-      animation: subtlePulse 2s ease-in-out infinite;
+    }
+
+    .q-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
     }
 
     /* --- Email Screen --- */
@@ -513,9 +638,7 @@
       margin: 0 auto 24px;
     }
 
-    .email-icon svg {
-      color: var(--teal);
-    }
+    .email-icon svg { color: var(--teal); }
 
     .email-heading {
       font-family: var(--font-heading);
@@ -552,15 +675,13 @@
       border: 2px solid var(--gray-light);
       border-radius: 10px;
       font-family: var(--font-body);
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--black);
       transition: border-color 200ms ease, box-shadow 200ms ease;
       background: #fafafa;
     }
 
-    .input-group input::placeholder {
-      color: #9ca3af;
-    }
+    .input-group input::placeholder { color: #9ca3af; }
 
     .input-group input:focus {
       outline: none;
@@ -579,6 +700,26 @@
       color: #9ca3af;
       margin-top: 14px;
     }
+
+    /* --- Typing dots --- */
+    .typing-dots {
+      display: inline-flex;
+      gap: 3px;
+      margin-left: 4px;
+      vertical-align: baseline;
+    }
+
+    .typing-dots span {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: typingDots 1.4s ease-in-out infinite;
+    }
+
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 
     /* --- Thank You Screen --- */
     .done-card {
@@ -602,9 +743,7 @@
       animation: checkPop 0.5s ease forwards;
     }
 
-    .done-icon svg {
-      color: var(--white);
-    }
+    .done-icon svg { color: var(--white); }
 
     .done-heading {
       font-family: var(--font-heading);
@@ -622,52 +761,6 @@
       max-width: 380px;
       margin: 0 auto;
     }
-
-    .done-tiers {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid var(--gray-light);
-    }
-
-    .done-tier {
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      background: var(--gray-light);
-      color: var(--gray);
-    }
-
-    .done-tier.mystery {
-      background: var(--teal-bg);
-      color: var(--teal);
-      border: 1px solid rgba(15,118,110,0.2);
-    }
-
-    /* --- Typing dots --- */
-    .typing-dots {
-      display: inline-flex;
-      gap: 3px;
-      margin-left: 4px;
-      vertical-align: baseline;
-    }
-
-    .typing-dots span {
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--teal);
-      animation: typingDots 1.4s ease-in-out infinite;
-    }
-
-    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 
     /* --- Footer --- */
     .footer {
@@ -713,33 +806,94 @@
       color: var(--gray);
     }
 
-    /* --- Responsive --- */
+    /* ========================================
+       RESPONSIVE: TABLET (max-width: 768px)
+       ======================================== */
+    @media (max-width: 768px) {
+      .screen {
+        padding: 70px 20px 90px;
+      }
+
+      .screen-inner { max-width: 100%; }
+
+      .q-card { padding: 28px 22px; }
+      .email-card { padding: 32px 22px; }
+
+      .tier-preview { margin-top: 36px; }
+
+      .option-card { padding: 14px 16px; }
+      .option-text { font-size: 0.9rem; }
+    }
+
+    /* ========================================
+       RESPONSIVE: MOBILE (max-width: 640px)
+       ======================================== */
     @media (max-width: 640px) {
       .key-hint { display: none; }
       .logo-text { display: none; }
       .tier-preview { display: none; }
-      .done-tiers { flex-wrap: wrap; }
 
-      .q-card { padding: 24px 20px; }
-      .email-card { padding: 28px 20px; }
-      .done-card { padding: 32px 20px; }
+      .logo { top: 14px; left: 16px; }
+      .logo-mark { width: 32px; height: 32px; font-size: 0.6rem; }
+      .q-counter { top: 18px; right: 16px; font-size: 0.7rem; }
+
+      .screen {
+        padding: 60px 16px 80px;
+      }
+
+      #screen-0 { padding-top: 60px; }
+
+      .hook-text { margin-bottom: 16px; }
+      .hook-sub { font-size: 0.95rem; margin-bottom: 32px; }
+
+      .q-card { padding: 22px 16px; }
+      .email-card { padding: 28px 18px; }
+      .done-card { padding: 32px 18px; }
+
+      .q-header { margin-bottom: 14px; }
+      .q-text { font-size: 1rem; margin-bottom: 18px; }
+      .q-scenario { font-size: 0.85rem; padding: 12px 14px; margin-bottom: 12px; }
+
+      .option-card { padding: 14px 14px; gap: 12px; }
+      .option-letter { width: 28px; height: 28px; font-size: 0.7rem; border-radius: 6px; }
+      .option-text { font-size: 0.85rem; padding-top: 2px; line-height: 1.5; }
+      .options-grid { gap: 8px; margin-bottom: 20px; }
 
       .q-footer {
         flex-direction: column-reverse;
-        gap: 12px;
+        gap: 8px;
         align-items: stretch;
       }
 
+      .q-footer .answer-warning {
+        justify-content: center;
+      }
+
       .q-footer .btn {
+        width: 100%;
         justify-content: center;
       }
 
       .btn {
         width: 100%;
         justify-content: center;
+        padding: 15px 28px;
       }
 
       .footer { display: none; }
+    }
+
+    /* ========================================
+       RESPONSIVE: SMALL MOBILE (max-width: 380px)
+       ======================================== */
+    @media (max-width: 380px) {
+      .screen { padding: 56px 12px 70px; }
+      .q-card { padding: 18px 14px; }
+      .option-card { padding: 12px 12px; gap: 10px; }
+      .option-letter { width: 26px; height: 26px; font-size: 0.65rem; }
+      .option-text { font-size: 0.82rem; }
+      .q-text { font-size: 0.95rem; }
+      .q-difficulty { font-size: 0.6rem; padding: 2px 8px; }
     }
   </style>
 </head>
@@ -767,7 +921,7 @@
     <div class="screen-inner">
       <div class="hook-badge">
         <span class="hook-badge-dot"></span>
-        7 questions. 3 minutes. Free.
+        10 questions. 3 minutes. Free.
       </div>
       <p class="hook-text">
         Test your Creative Strategy Skills <span class="teal">in under 3 mins.</span>
@@ -804,149 +958,11 @@
     </div>
   </div>
 
-  <!-- Screen 1: Q1 -->
-  <div class="screen" id="screen-1">
-    <div class="screen-inner">
-      <div class="q-card">
-        <div class="q-dots" id="dots-1"></div>
-        <div class="q-number">Question 1 of 7</div>
-        <p class="q-text">A supplement brand hires you to write ads for their stress-relief product. All they send is a spec sheet: Ashwagandha, L-Theanine, Magnesium. Claim: "reduces stress in 30 days."</p>
-        <p class="q-prompt">Walk us through your first 60 minutes before you write a single word.</p>
-        <textarea id="a1" placeholder="2-3 sentences. Go with your gut."></textarea>
-        <div class="q-footer">
-          <span class="q-hint">No right answer.</span>
-          <button class="btn btn-teal" onclick="nextScreen()">
-            Next
-            <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Question screens injected by JS -->
+  <div id="questionScreens"></div>
 
-  <!-- Screen 2: Q2 -->
-  <div class="screen" id="screen-2">
-    <div class="screen-inner">
-      <div class="q-card">
-        <div class="q-dots" id="dots-2"></div>
-        <div class="q-number">Question 2 of 7</div>
-        <p class="q-text">You're researching for a hair growth supplement. You find this review:</p>
-        <div class="q-context">"I was so embarrassed to even search for this. My ponytail used to be thick and now I can see my scalp through it. I tried everything. Biotin, castor oil, expensive shampoos. Nothing worked. I almost gave up."</div>
-        <p class="q-prompt">What do you see in this review and how would you use it?</p>
-        <textarea id="a2" placeholder="2-3 sentences. Go with your gut."></textarea>
-        <div class="q-footer">
-          <span class="q-hint">No right answer.</span>
-          <button class="btn btn-teal" onclick="nextScreen()">
-            Next
-            <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Screen 3: Q3 -->
-  <div class="screen" id="screen-3">
-    <div class="screen-inner">
-      <div class="q-card">
-        <div class="q-dots" id="dots-3"></div>
-        <div class="q-number">Question 3 of 7</div>
-        <p class="q-text">A skincare brand's top ad has been live for 3 weeks. CPA climbed from $28 to $45 in the last 5 days. Hook rate dropped from 35% to 18%. But people who watch the full ad still convert well.</p>
-        <p class="q-prompt">What's happening and what's your move?</p>
-        <textarea id="a3" placeholder="2-3 sentences. Go with your gut."></textarea>
-        <div class="q-footer">
-          <span class="q-hint">No right answer.</span>
-          <button class="btn btn-teal" onclick="nextScreen()">
-            Next
-            <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Screen 4: Q4 -->
-  <div class="screen" id="screen-4">
-    <div class="screen-inner">
-      <div class="q-card">
-        <div class="q-dots" id="dots-4"></div>
-        <div class="q-number">Question 4 of 7</div>
-        <p class="q-text">Write a 3-line UGC brief for a sleep supplement ad. The product uses magnesium glycinate and costs $39/month.</p>
-        <p class="q-prompt">That's all the info you have. Go.</p>
-        <textarea id="a4" placeholder="Write your brief."></textarea>
-        <div class="q-footer">
-          <span class="q-hint">No right answer.</span>
-          <button class="btn btn-teal" onclick="nextScreen()">
-            Next
-            <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Screen 5: Q5 -->
-  <div class="screen" id="screen-5">
-    <div class="screen-inner">
-      <div class="q-card">
-        <div class="q-dots" id="dots-5"></div>
-        <div class="q-number">Question 5 of 7</div>
-        <p class="q-text">A fitness app ad has a 2.4% CTR (well above average) but only 0.3% of clickers buy. CPA is $62 against a $40 target. The ad uses a dramatic transformation hook.</p>
-        <p class="q-prompt">What's going wrong?</p>
-        <textarea id="a5" placeholder="2-3 sentences. Go with your gut."></textarea>
-        <div class="q-footer">
-          <span class="q-hint">No right answer.</span>
-          <button class="btn btn-teal" onclick="nextScreen()">
-            Next
-            <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Screen 6: Q6 -->
-  <div class="screen" id="screen-6">
-    <div class="screen-inner">
-      <div class="q-card">
-        <div class="q-dots" id="dots-6"></div>
-        <div class="q-number">Question 6 of 7</div>
-        <p class="q-text">A protein bar brand runs new ads every 2 weeks. New creators, new visuals, new formats. But every ad says the same thing: "high protein, low sugar." CPA has risen for 2 months straight. The media buyer says they need better creative.</p>
-        <p class="q-prompt">Do you agree? What would you tell them?</p>
-        <textarea id="a6" placeholder="2-3 sentences. Go with your gut."></textarea>
-        <div class="q-footer">
-          <span class="q-hint">No right answer.</span>
-          <button class="btn btn-teal" onclick="nextScreen()">
-            Next
-            <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Screen 7: Q7 -->
-  <div class="screen" id="screen-7">
-    <div class="screen-inner">
-      <div class="q-card">
-        <div class="q-dots" id="dots-7"></div>
-        <div class="q-number">Question 7 of 7</div>
-        <p class="q-text">You tested two ads for an acne brand. Hypothesis: "before/after visuals will beat a problem-agitation hook." Results: before/after got 0.6% CTR, $72 CPA. Problem-agitation got 1.9% CTR, $29 CPA.</p>
-        <p class="q-prompt">What's your takeaway and what do you do next?</p>
-        <textarea id="a7" placeholder="2-3 sentences. Go with your gut."></textarea>
-        <div class="q-footer">
-          <span class="q-hint">Last one.</span>
-          <button class="btn btn-teal" onclick="nextScreen()">
-            See my results
-            <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Screen 8: Email Capture -->
-  <div class="screen" id="screen-8">
+  <!-- Email Capture -->
+  <div class="screen" id="screen-email">
     <div class="screen-inner">
       <div class="email-card">
         <div class="email-icon">
@@ -967,26 +983,17 @@
     </div>
   </div>
 
-  <!-- Screen 9: Thank You -->
-  <div class="screen" id="screen-9">
+  <!-- Please Wait / Thank You -->
+  <div class="screen" id="screen-done">
     <div class="screen-inner">
       <div class="done-card">
         <div class="done-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <p class="done-heading">Check your inbox.</p>
-        <p class="done-text">Your Creative Strategy Profile is on the way. It'll tell you exactly where you stand and what the next move is.</p>
-        <div class="done-tiers">
-          <span class="done-tier">Writer</span>
-          <span class="done-tier">Student</span>
-          <span class="done-tier">Practitioner</span>
-          <span class="done-tier">Strategist</span>
-          <span class="done-tier mystery">You: ???</span>
-        </div>
-        <a id="downloadReport" href="#" class="btn btn-teal" style="display:none; margin-top: 24px; text-decoration: none; text-align: center;" target="_blank">
-          Download Your Full Report (PDF)
-          <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
+        <p class="done-heading">Please wait...</p>
+        <p class="done-text">Your profile is being created.</p>
+        <p class="done-sub" style="margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray);">We will send you the full results in your email.</p>
+        <p class="done-note" style="margin-top: 1rem; font-size: 0.95rem; color: #ef4444; font-weight: 600;">Do not forget to check your Spam Folder.</p>
       </div>
     </div>
   </div>
@@ -1000,18 +1007,258 @@
   </div>
 
   <script>
+    // ============================================
+    // QUESTION DATA
+    // Each option has a score (1-4). Shuffled per question so best answer isn't always last.
+    // ============================================
+    const questions = [
+      {
+        difficulty: 'easy',
+        question: 'What does "Voice of Customer" (VOC) research actually mean in creative strategy?',
+        options: [
+          { text: 'Writing copy that sounds conversational and human', score: 1 },
+          { text: 'Reading reviews to see what people like about a product', score: 2 },
+          { text: 'Pulling exact phrases and emotional triggers from real customer feedback to use in ads', score: 3 },
+          { text: 'Systematically mining language from reviews, Reddit, support tickets, and social comments to map pain points, desires, and objections into hooks and angles', score: 4 },
+        ]
+      },
+      {
+        difficulty: 'easy',
+        question: 'A supplement brand hires you to write ads for their stress-relief product. All they send is a spec sheet. What\'s your first move?',
+        options: [
+          { text: 'Start drafting headlines based on the product benefits', score: 1 },
+          { text: 'Map out a research plan: VOC sources, competitor audit, awareness stages. Form hypotheses before writing anything.', score: 4 },
+          { text: 'Look at what competitors are doing and write something similar but better', score: 2 },
+          { text: 'Go to Amazon reviews and Reddit to find real customer language about stress relief', score: 3 },
+        ]
+      },
+      {
+        difficulty: 'medium',
+        scenario: '"I was so embarrassed to even search for this. My ponytail used to be thick and now I can see my scalp through it. I tried everything. Biotin, castor oil, expensive shampoos. Nothing worked."',
+        question: 'You find this review while researching for a hair growth product. What do you see?',
+        options: [
+          { text: 'A research goldmine: the emotional journey (shame, identity loss, solution fatigue) maps to multiple ad angles and awareness stages', score: 4 },
+          { text: 'A good testimonial you can screenshot and use in the ad', score: 1 },
+          { text: 'Real VOC language showing shame, identity loss, and failed solutions. Perfect for hooks and pain-point angles.', score: 3 },
+          { text: 'An emotional hook about hair loss embarrassment', score: 2 },
+        ]
+      },
+      {
+        difficulty: 'medium',
+        scenario: 'CPA climbed from $28 to $45 in 5 days. Hook rate dropped from 35% to 18%. But people who watch the full ad still convert well.',
+        question: 'A skincare brand\'s top ad has been live for 3 weeks. What\'s happening?',
+        options: [
+          { text: 'The audience is getting tired of seeing it. Time to refresh the creative.', score: 2 },
+          { text: 'The ad stopped working. Kill it and make a new one.', score: 1 },
+          { text: 'Hook fatigue, not message fatigue. Test 3-5 new hooks on the same ad body. Check frequency caps and audience overlap too.', score: 4 },
+          { text: 'Classic hook fatigue. The body and offer still work. Test new hooks on the same body.', score: 3 },
+        ]
+      },
+      {
+        difficulty: 'easy',
+        question: 'An ad\'s "hook rate" is 35%. What does that actually tell you?',
+        options: [
+          { text: '35% retention at 3 seconds is solid, but cross-reference with hold rate, CTR, and CPA. A high hook rate with low conversion means the hook over-promises.', score: 4 },
+          { text: '35% of people liked the ad', score: 1 },
+          { text: '35% of viewers were retained in the first 3 seconds. That opening pattern-interrupt is working.', score: 3 },
+          { text: '35% of people watched the first few seconds of the video', score: 2 },
+        ]
+      },
+      {
+        difficulty: 'medium',
+        question: 'You need a UGC brief for a sleep supplement ($39/month, magnesium glycinate). What matters most in the brief?',
+        options: [
+          { text: 'Lead with a specific pain point ("I used to stare at the ceiling for 2 hours"), then the shift, then soft CTA', score: 3 },
+          { text: 'Include the product name, price, and ingredients prominently', score: 1 },
+          { text: 'Specify the hook type (problem-agitation), the emotional beat (frustration to relief), and the audience awareness stage. Not just what to say but why.', score: 4 },
+          { text: 'Focus on the benefit (better sleep) and make it sound relatable', score: 2 },
+        ]
+      },
+      {
+        difficulty: 'hard',
+        scenario: 'A fitness app ad has 2.4% CTR (well above average) but only 0.3% of clickers buy. CPA is $62 against a $40 target. The ad uses a dramatic transformation hook.',
+        question: 'What\'s going wrong?',
+        options: [
+          { text: 'The ad is attracting clicks but probably not the right people', score: 2 },
+          { text: 'The dramatic hook pulls unqualified traffic (curiosity clickers). The ad over-promises. Test hooks that pre-qualify: mention price, effort, or specific use case to filter out tourists.', score: 4 },
+          { text: 'The landing page needs work since people are clicking but not buying', score: 1 },
+          { text: 'The transformation hook attracts curiosity clickers, not qualified buyers. The ad is over-promising or targeting too broad.', score: 3 },
+        ]
+      },
+      {
+        difficulty: 'medium',
+        scenario: 'New creators, new visuals, new formats every 2 weeks. But every ad says "high protein, low sugar." CPA has risen for 2 months straight.',
+        question: 'A protein bar brand keeps making new ads but performance keeps dropping. The media buyer says they need "better creative." Do you agree?',
+        options: [
+          { text: 'The media buyer is confusing creative rotation with angle rotation. The messaging is stale. Map new angles from research (convenience, taste, post-workout ritual) and test each as a hypothesis.', score: 4 },
+          { text: 'The problem isn\'t creative execution, it\'s the angle. They keep saying the same thing in different packaging. They need new angles, not new visuals.', score: 3 },
+          { text: 'Yes, they should try different ad formats like carousels or reels', score: 1 },
+          { text: 'Maybe. They should also try different audiences, not just new creatives.', score: 2 },
+        ]
+      },
+      {
+        difficulty: 'hard',
+        scenario: 'Before/after visuals: 0.6% CTR, $72 CPA. Problem-agitation hook: 1.9% CTR, $29 CPA. Your hypothesis that before/after would win was wrong.',
+        question: 'You tested two ads for an acne brand. What\'s your takeaway?',
+        options: [
+          { text: 'Before/after didn\'t work for this audience. Run more problem-agitation variations.', score: 2 },
+          { text: 'Problem-agitation works better for acne. Use that style going forward.', score: 1 },
+          { text: 'Update the mental model: this audience is problem-aware, not solution-aware. Next hypothesis: test specificity variations on problem-agitation. Also check if before/after failed on hook or body. Data might support a hybrid.', score: 4 },
+          { text: 'The hypothesis was wrong but valuable. The audience responds more to emotional pain than visual proof. Next: combine problem-agitation hooks with social proof elements.', score: 3 },
+        ]
+      },
+      {
+        difficulty: 'hard',
+        question: 'A cold audience knows they have a problem but doesn\'t know solutions exist. What awareness stage are they in, and what does that mean for your ad?',
+        options: [
+          { text: 'They\'re problem-aware. Lead with the pain and agitate it before introducing the solution. Don\'t lead with the product.', score: 3 },
+          { text: 'Problem-aware. Open on the pain they already feel, validate it, bridge to the solution category, then introduce the product. Jumping to product claims will lose them. Structure: problem, agitation, solution category, your product.', score: 4 },
+          { text: 'They\'re cold so you need to grab attention with a bold claim or promise', score: 1 },
+          { text: 'They\'re unaware of solutions, so educate them about the product and its benefits', score: 2 },
+        ]
+      }
+    ];
+
+    const totalQuestions = questions.length;
     let current = 0;
-    const total = 10; // 0=hook, 1-7=questions, 8=email, 9=done
-    const totalQuestions = 7;
+    let answers = new Array(totalQuestions).fill(null);
+    const LETTERS = ['A', 'B', 'C', 'D'];
+
+    // ============================================
+    // BUILD QUESTION SCREENS
+    // ============================================
+    function buildQuestions() {
+      const container = document.getElementById('questionScreens');
+
+      questions.forEach(function(q, idx) {
+        var screenNum = idx + 1;
+        var screen = document.createElement('div');
+        screen.className = 'screen';
+        screen.id = 'screen-' + screenNum;
+
+        var scenarioHTML = '';
+        if (q.scenario) {
+          scenarioHTML = '<div class="q-scenario">' + q.scenario + '</div>';
+        }
+
+        var optionsHTML = '';
+        for (var oi = 0; oi < q.options.length; oi++) {
+          optionsHTML += '<div class="option-card" data-q="' + idx + '" data-score="' + q.options[oi].score + '" onclick="selectOption(this,' + idx + ',' + q.options[oi].score + ')">' +
+            '<div class="option-letter">' + LETTERS[oi] + '</div>' +
+            '<div class="option-text">' + q.options[oi].text + '</div>' +
+          '</div>';
+        }
+
+        var isLast = idx === totalQuestions - 1;
+        var btnText = isLast ? 'See my results' : 'Next';
+
+        screen.innerHTML =
+          '<div class="screen-inner">' +
+            '<div class="q-card">' +
+              '<div class="q-dots" id="dots-' + screenNum + '"></div>' +
+              '<div class="q-header">' +
+                '<div class="q-number">Question ' + screenNum + ' of ' + totalQuestions + '</div>' +
+                '<span class="q-difficulty ' + q.difficulty + '">' + q.difficulty + '</span>' +
+              '</div>' +
+              scenarioHTML +
+              '<p class="q-text">' + q.question + '</p>' +
+              '<div class="options-grid" id="optionsGrid-' + idx + '">' + optionsHTML + '</div>' +
+              '<div class="q-footer">' +
+                '<div class="answer-warning" id="warn-' + idx + '">Pick an answer to continue</div>' +
+                '<button class="btn btn-teal" id="nextBtn-' + idx + '" onclick="handleNext(' + idx + ')">' +
+                  btnText +
+                  ' <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>' +
+                '</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+
+        container.appendChild(screen);
+      });
+    }
+
+    // ============================================
+    // OPTION SELECTION
+    // ============================================
+    function selectOption(el, qIdx, score) {
+      var cards = el.parentNode.querySelectorAll('.option-card');
+      for (var i = 0; i < cards.length; i++) {
+        cards[i].classList.remove('selected');
+      }
+      el.classList.add('selected');
+      answers[qIdx] = score;
+
+      // Hide warning if shown
+      var warn = document.getElementById('warn-' + qIdx);
+      if (warn) warn.classList.remove('show');
+
+      // Enable button visually
+      var btn = document.getElementById('nextBtn-' + qIdx);
+      if (btn) btn.disabled = false;
+    }
+
+    // ============================================
+    // MANDATORY ANSWER CHECK + NEXT
+    // ============================================
+    function handleNext(qIdx) {
+      if (answers[qIdx] === null) {
+        // Shake the options grid
+        var grid = document.getElementById('optionsGrid-' + qIdx);
+        grid.classList.remove('shake');
+        void grid.offsetWidth; // force reflow
+        grid.classList.add('shake');
+
+        // Show warning
+        var warn = document.getElementById('warn-' + qIdx);
+        warn.classList.remove('show');
+        void warn.offsetWidth;
+        warn.classList.add('show');
+
+        // Hide warning after 2.5s
+        setTimeout(function() { warn.classList.remove('show'); }, 2500);
+        return;
+      }
+      nextScreen();
+    }
+
+    // ============================================
+    // SCORING
+    // ============================================
+    function calculateScore() {
+      var total = 0;
+      for (var i = 0; i < answers.length; i++) {
+        total += (answers[i] || 1);
+      }
+      // 10 questions, 1-4 each = 10-40
+      var tier;
+      if (total <= 17) tier = 'The Writer';
+      else if (total <= 25) tier = 'The Student';
+      else if (total <= 33) tier = 'The Practitioner';
+      else tier = 'The Strategist';
+      return { total: total, tier: tier };
+    }
+
+    // ============================================
+    // NAVIGATION
+    // ============================================
+    var totalScreens = totalQuestions + 3; // 0=hook, 1-10=questions, 11=email, 12=done
+
+    function getScreenId(num) {
+      if (num === 0) return 'screen-0';
+      if (num >= 1 && num <= totalQuestions) return 'screen-' + num;
+      if (num === totalQuestions + 1) return 'screen-email';
+      if (num === totalQuestions + 2) return 'screen-done';
+      return null;
+    }
 
     function updateProgress() {
-      const pct = (current / (total - 1)) * 100;
+      var pct = (current / (totalScreens - 1)) * 100;
       document.getElementById('progressFill').style.width = pct + '%';
     }
 
     function updateCounter() {
-      const counter = document.getElementById('qCounter');
-      if (current >= 1 && current <= 7) {
+      var counter = document.getElementById('qCounter');
+      if (current >= 1 && current <= totalQuestions) {
         counter.textContent = current + ' / ' + totalQuestions;
         counter.classList.add('visible');
       } else {
@@ -1020,11 +1267,11 @@
     }
 
     function updateDots(screenNum) {
-      const dotsContainer = document.getElementById('dots-' + screenNum);
+      var dotsContainer = document.getElementById('dots-' + screenNum);
       if (!dotsContainer) return;
       dotsContainer.innerHTML = '';
-      for (let i = 1; i <= totalQuestions; i++) {
-        const dot = document.createElement('div');
+      for (var i = 1; i <= totalQuestions; i++) {
+        var dot = document.createElement('div');
         dot.className = 'q-dot';
         if (i < screenNum) dot.classList.add('done');
         if (i === screenNum) dot.classList.add('current');
@@ -1033,115 +1280,87 @@
     }
 
     function nextScreen() {
-      if (current === 8) return;
+      // Block advancing from question without answer
+      if (current >= 1 && current <= totalQuestions) {
+        var qIdx = current - 1;
+        if (answers[qIdx] === null) return;
+      }
 
-      document.getElementById('screen-' + current).classList.remove('active');
+      if (current === totalQuestions + 1) return;
+
+      var currentId = getScreenId(current);
+      var el = document.getElementById(currentId);
+      if (el) el.classList.remove('active');
+
       current++;
-      document.getElementById('screen-' + current).classList.add('active');
+
+      var nextId = getScreenId(current);
+      var nextEl = document.getElementById(nextId);
+      if (nextEl) {
+        nextEl.classList.add('active');
+        // Scroll to top of screen for question cards
+        nextEl.scrollTop = 0;
+      }
+
       updateProgress();
       updateCounter();
 
-      // Build dots for current question
-      if (current >= 1 && current <= 7) {
+      if (current >= 1 && current <= totalQuestions) {
         updateDots(current);
+        // Button starts disabled for new question
+        var btn = document.getElementById('nextBtn-' + (current - 1));
+        if (btn && answers[current - 1] === null) btn.disabled = true;
       }
 
-      // Focus textarea on question screens
-      const textarea = document.querySelector('#screen-' + current + ' textarea');
-      if (textarea) {
-        setTimeout(() => textarea.focus(), 380);
+      if (current === totalQuestions + 1) {
+        setTimeout(function() { document.getElementById('firstName').focus(); }, 380);
       }
 
-      // Hide footer on done screen
-      if (current === 9) {
+      if (current === totalQuestions + 2) {
         document.getElementById('footerBar').style.display = 'none';
       }
     }
 
+    // ============================================
+    // SUBMIT
+    // ============================================
     async function submitQuiz() {
-      const name = document.getElementById('firstName').value.trim();
-      const email = document.getElementById('email').value.trim();
-
+      var name = document.getElementById('firstName').value.trim();
+      var email = document.getElementById('email').value.trim();
       if (!name || !email) return;
 
-      // Disable button and show loading
-      const btn = document.getElementById('submitBtn');
+      var btn = document.getElementById('submitBtn');
       btn.disabled = true;
-      btn.innerHTML = 'Analyzing your answers<span class="typing-dots"><span></span><span></span><span></span></span>';
 
-      const data = {
-        name: name,
-        email: email,
-        q1: document.getElementById('a1').value,
-        q2: document.getElementById('a2').value,
-        q3: document.getElementById('a3').value,
-        q4: document.getElementById('a4').value,
-        q5: document.getElementById('a5').value,
-        q6: document.getElementById('a6').value,
-        q7: document.getElementById('a7').value
-      };
+      var result = calculateScore();
 
-      try {
-        // Score with Cloudflare Worker AI
-        const scoreResponse = await fetch('https://csos-scorer.m-a-rab2012.workers.dev', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-
-        const result = await scoreResponse.json();
-        console.log('Quiz result:', result);
-
-        // Update the done screen with their actual tier
-        const tierMap = {
-          'The Writer': 'Writer',
-          'The Student': 'Student',
-          'The Practitioner': 'Practitioner',
-          'The Strategist': 'Strategist'
-        };
-        const tierShort = tierMap[result.tier] || 'Student';
-
-        document.querySelector('.done-heading').textContent = 'You are: ' + result.tier + '.';
-        document.querySelector('.done-text').textContent = 'Your full Creative Strategy Profile is ready. Download it below to see your level, your biggest gap, and what to focus on next.';
-
-        // Highlight their tier in the done screen
-        document.querySelectorAll('.done-tier').forEach(el => {
-          el.classList.remove('mystery');
-          if (el.textContent.trim().toLowerCase() === tierShort.toLowerCase()) {
-            el.classList.add('mystery');
-          }
-        });
-        // Remove the "You: ???" tier
-        const mysteryTier = document.querySelector('.done-tier:last-child');
-        if (mysteryTier) mysteryTier.remove();
-
-        // Show download link for the matching PDF report
-        const pdfMap = {
-          'Writer': 'CSOS_Report_The_Writer.pdf',
-          'Student': 'CSOS_Report_The_Student.pdf',
-          'Practitioner': 'CSOS_Report_The_Practitioner.pdf',
-          'Strategist': 'CSOS_Report_The_Strategist.pdf'
-        };
-        const downloadBtn = document.getElementById('downloadReport');
-        downloadBtn.href = '/pdfs/' + pdfMap[tierShort];
-        downloadBtn.style.display = 'inline-flex';
-
-      } catch (err) {
-        console.error('Scoring error:', err);
-        // If scoring fails, still show thank you screen
-        document.querySelector('.done-heading').textContent = 'Something went wrong.';
-        document.querySelector('.done-text').textContent = 'We couldn\'t score your quiz right now. Please try again in a few minutes.';
-      }
-
-      // Go to done screen
-      document.getElementById('screen-8').classList.remove('active');
-      current = 9;
-      document.getElementById('screen-9').classList.add('active');
+      // Go to wait screen
+      document.getElementById('screen-email').classList.remove('active');
+      current = totalQuestions + 2;
+      document.getElementById('screen-done').classList.add('active');
       updateProgress();
       updateCounter();
+
+      // Fire Meta Pixel Lead event
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead');
+      }
+
+      // Send to worker for Kit tagging
+      try {
+        await fetch('https://csos-scorer.m-a-rab2012.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, email: email, tier: result.tier, score: result.total })
+        });
+      } catch (err) {
+        console.error('Tagging error:', err);
+      }
     }
 
-    // Enter key navigation
+    // ============================================
+    // KEYBOARD NAVIGATION
+    // ============================================
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' && !e.shiftKey) {
         if (current === 0) {
@@ -1149,18 +1368,31 @@
           nextScreen();
           return;
         }
-        if (current >= 1 && current <= 7) {
+        if (current >= 1 && current <= totalQuestions) {
           e.preventDefault();
-          nextScreen();
+          handleNext(current - 1);
           return;
         }
-        if (current === 8) {
+        if (current === totalQuestions + 1) {
           e.preventDefault();
           submitQuiz();
           return;
         }
       }
+      // Number keys 1-4 to select options on question screens
+      if (current >= 1 && current <= totalQuestions) {
+        var num = parseInt(e.key);
+        if (num >= 1 && num <= 4) {
+          var cards = document.querySelectorAll('#screen-' + current + ' .option-card');
+          if (cards[num - 1]) cards[num - 1].click();
+        }
+      }
     });
+
+    // ============================================
+    // INIT
+    // ============================================
+    buildQuestions();
   </script>
 
 </body>
