@@ -536,6 +536,7 @@
       background: var(--teal-bg);
       animation: selectPop 0.3s ease;
       box-shadow: 0 0 0 3px rgba(15,118,110,0.12);
+      opacity: 1;
     }
 
     .option-card.selected .option-letter {
@@ -588,6 +589,10 @@
 
     .options-grid.shake {
       animation: shake 0.4s ease;
+    }
+
+    .options-grid.locked .option-card {
+      pointer-events: none;
     }
 
     /* --- Mini Progress Dots --- */
@@ -1143,14 +1148,11 @@
 
         var optionsHTML = '';
         for (var oi = 0; oi < q.options.length; oi++) {
-          optionsHTML += '<div class="option-card" data-q="' + idx + '" data-score="' + q.options[oi].score + '" onclick="selectOption(this,' + idx + ',' + q.options[oi].score + ')">' +
+          optionsHTML += '<div class="option-card" data-q="' + idx + '" data-score="' + q.options[oi].score + '">' +
             '<div class="option-letter">' + LETTERS[oi] + '</div>' +
             '<div class="option-text">' + q.options[oi].text + '</div>' +
           '</div>';
         }
-
-        var isLast = idx === totalQuestions - 1;
-        var btnText = isLast ? 'See my results' : 'Next';
 
         screen.innerHTML =
           '<div class="screen-inner">' +
@@ -1163,13 +1165,6 @@
               scenarioHTML +
               '<p class="q-text">' + q.question + '</p>' +
               '<div class="options-grid" id="optionsGrid-' + idx + '">' + optionsHTML + '</div>' +
-              '<div class="q-footer">' +
-                '<div class="answer-warning" id="warn-' + idx + '">Pick an answer to continue</div>' +
-                '<button class="btn btn-teal" id="nextBtn-' + idx + '" onclick="handleNext(' + idx + ')">' +
-                  btnText +
-                  ' <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>' +
-                '</button>' +
-              '</div>' +
             '</div>' +
           '</div>';
 
@@ -1181,6 +1176,9 @@
     // OPTION SELECTION
     // ============================================
     function selectOption(el, qIdx, score) {
+      // Prevent double-selection while auto-advancing
+      if (el.parentNode.classList.contains('locked')) return;
+
       var cards = el.parentNode.querySelectorAll('.option-card');
       for (var i = 0; i < cards.length; i++) {
         cards[i].classList.remove('selected');
@@ -1188,38 +1186,16 @@
       el.classList.add('selected');
       answers[qIdx] = score;
 
-      // Hide warning if shown
-      var warn = document.getElementById('warn-' + qIdx);
-      if (warn) warn.classList.remove('show');
-
-      // Enable button visually
-      var btn = document.getElementById('nextBtn-' + qIdx);
-      if (btn) btn.disabled = false;
+      // Lock options and auto-advance after brief delay so user sees selection
+      el.parentNode.classList.add('locked');
+      setTimeout(function() {
+        nextScreen();
+        // Unlock after transition in case user navigates back
+        el.parentNode.classList.remove('locked');
+      }, 600);
     }
 
-    // ============================================
-    // MANDATORY ANSWER CHECK + NEXT
-    // ============================================
-    function handleNext(qIdx) {
-      if (answers[qIdx] === null) {
-        // Shake the options grid
-        var grid = document.getElementById('optionsGrid-' + qIdx);
-        grid.classList.remove('shake');
-        void grid.offsetWidth; // force reflow
-        grid.classList.add('shake');
-
-        // Show warning
-        var warn = document.getElementById('warn-' + qIdx);
-        warn.classList.remove('show');
-        void warn.offsetWidth;
-        warn.classList.add('show');
-
-        // Hide warning after 2.5s
-        setTimeout(function() { warn.classList.remove('show'); }, 2500);
-        return;
-      }
-      nextScreen();
-    }
+    // handleNext is no longer needed — options auto-advance on selection
 
     // ============================================
     // SCORING
@@ -1307,9 +1283,6 @@
 
       if (current >= 1 && current <= totalQuestions) {
         updateDots(current);
-        // Button starts disabled for new question
-        var btn = document.getElementById('nextBtn-' + (current - 1));
-        if (btn && answers[current - 1] === null) btn.disabled = true;
       }
 
       if (current === totalQuestions + 1) {
@@ -1368,11 +1341,6 @@
           nextScreen();
           return;
         }
-        if (current >= 1 && current <= totalQuestions) {
-          e.preventDefault();
-          handleNext(current - 1);
-          return;
-        }
         if (current === totalQuestions + 1) {
           e.preventDefault();
           submitQuiz();
@@ -1383,16 +1351,62 @@
       if (current >= 1 && current <= totalQuestions) {
         var num = parseInt(e.key);
         if (num >= 1 && num <= 4) {
+          var qIdx = current - 1;
           var cards = document.querySelectorAll('#screen-' + current + ' .option-card');
-          if (cards[num - 1]) cards[num - 1].click();
+          if (cards[num - 1]) {
+            var score = parseInt(cards[num - 1].getAttribute('data-score'));
+            selectOption(cards[num - 1], qIdx, score);
+          }
         }
       }
     });
 
     // ============================================
+    // TOUCH-SAFE OPTION SELECTION
+    // Prevents scroll from triggering option selection on mobile
+    // ============================================
+    var touchStartY = 0;
+    var touchMoved = false;
+    var SCROLL_THRESHOLD = 10; // px of movement before it counts as scroll
+
+    function attachOptionListeners() {
+      var cards = document.querySelectorAll('.option-card');
+      for (var i = 0; i < cards.length; i++) {
+        (function(card) {
+          card.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+            touchMoved = false;
+          }, { passive: true });
+
+          card.addEventListener('touchmove', function(e) {
+            if (Math.abs(e.touches[0].clientY - touchStartY) > SCROLL_THRESHOLD) {
+              touchMoved = true;
+            }
+          }, { passive: true });
+
+          card.addEventListener('touchend', function(e) {
+            if (touchMoved) return; // was a scroll, not a tap
+            e.preventDefault(); // prevent ghost click
+            var qIdx = parseInt(card.getAttribute('data-q'));
+            var score = parseInt(card.getAttribute('data-score'));
+            selectOption(card, qIdx, score);
+          });
+
+          // Desktop click still works normally
+          card.addEventListener('click', function(e) {
+            var qIdx = parseInt(card.getAttribute('data-q'));
+            var score = parseInt(card.getAttribute('data-score'));
+            selectOption(card, qIdx, score);
+          });
+        })(cards[i]);
+      }
+    }
+
+    // ============================================
     // INIT
     // ============================================
     buildQuestions();
+    attachOptionListeners();
   </script>
 
 </body>
