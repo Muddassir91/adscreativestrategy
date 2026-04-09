@@ -534,7 +534,7 @@
     .option-card.selected {
       border-color: var(--teal);
       background: var(--teal-bg);
-      animation: selectPop 0.3s ease;
+      animation: selectPop 0.3s ease forwards;
       box-shadow: 0 0 0 3px rgba(15,118,110,0.12);
       opacity: 1;
     }
@@ -593,6 +593,7 @@
 
     .options-grid.locked .option-card {
       pointer-events: none;
+      touch-action: none;
     }
 
     /* --- Mini Progress Dots --- */
@@ -1363,37 +1364,46 @@
 
     // ============================================
     // TOUCH-SAFE OPTION SELECTION
-    // Prevents scroll from triggering option selection on mobile
+    // Prevents scroll from triggering option selection on mobile/tablet/touch-laptops.
+    // Uses a timestamp guard so touch→click double-fire is impossible on any device.
     // ============================================
+    var touchStartX = 0;
     var touchStartY = 0;
     var touchMoved = false;
+    var lastTouchEndTime = 0;
     var SCROLL_THRESHOLD = 10; // px of movement before it counts as scroll
+    var GHOST_CLICK_DELAY = 400; // ms to ignore clicks after a touchend
 
     function attachOptionListeners() {
       var cards = document.querySelectorAll('.option-card');
       for (var i = 0; i < cards.length; i++) {
         (function(card) {
           card.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
             touchMoved = false;
           }, { passive: true });
 
           card.addEventListener('touchmove', function(e) {
-            if (Math.abs(e.touches[0].clientY - touchStartY) > SCROLL_THRESHOLD) {
+            var dx = Math.abs(e.touches[0].clientX - touchStartX);
+            var dy = Math.abs(e.touches[0].clientY - touchStartY);
+            if (dx > SCROLL_THRESHOLD || dy > SCROLL_THRESHOLD) {
               touchMoved = true;
             }
           }, { passive: true });
 
           card.addEventListener('touchend', function(e) {
             if (touchMoved) return; // was a scroll, not a tap
-            e.preventDefault(); // prevent ghost click
+            e.preventDefault(); // suppress ghost click
+            lastTouchEndTime = Date.now();
             var qIdx = parseInt(card.getAttribute('data-q'));
             var score = parseInt(card.getAttribute('data-score'));
             selectOption(card, qIdx, score);
           });
 
-          // Desktop click still works normally
+          // Desktop click — ignored if a touch just handled this interaction
           card.addEventListener('click', function(e) {
+            if (Date.now() - lastTouchEndTime < GHOST_CLICK_DELAY) return;
             var qIdx = parseInt(card.getAttribute('data-q'));
             var score = parseInt(card.getAttribute('data-score'));
             selectOption(card, qIdx, score);
