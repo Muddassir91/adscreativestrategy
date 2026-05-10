@@ -227,7 +227,9 @@
       position: relative;
       min-height: 540px;
       display: grid;
-      place-items: center;
+      justify-items: center;
+      align-content: center;
+      gap: 26px;
     }
     .book-backdrop {
       width: min(520px, 100%);
@@ -572,6 +574,10 @@
       margin-left: auto;
       margin-right: auto;
     }
+    .hero-art .form-box {
+      width: min(520px, 100%);
+      margin-top: 0;
+    }
     .sticky-cta {
       position: fixed;
       right: 22px;
@@ -620,9 +626,9 @@
     }
     @media (max-width: 640px) {
       .wrap {
-        width: calc(100vw - 30px);
-        max-width: 360px;
-        margin-left: 15px;
+        width: min(330px, calc(100vw - 36px));
+        max-width: 330px;
+        margin-left: 18px;
         margin-right: auto;
       }
       .nav-links a:not(.btn) { display: none; }
@@ -634,7 +640,7 @@
       .btn { min-height: 50px; padding: 0 18px; }
       .hero { padding: 54px 0 76px; }
       h1 {
-        font-size: clamp(2.58rem, 12.2vw, 3.05rem);
+        font-size: clamp(2.42rem, 11.6vw, 2.92rem);
         max-width: 100%;
         overflow-wrap: normal;
       }
@@ -706,6 +712,14 @@
           <p class="eyebrow">Free CSOS business book</p>
           <h1><span class="line">The</span><span class="line">business</span><span class="line">side of</span><span class="line teal">creative</span><span class="line teal">strategy</span></h1>
           <p class="subhead">If you already know the craft, this shows you how to package, price, sell, and deliver the work like a specialist buyers take seriously.</p>
+        </div>
+        <div class="hero-art" aria-label="Book preview">
+          <div class="book-backdrop">
+            <div class="book-object">
+              <img src="/assets/businessbook/book-cover.png" alt="The Business Side of Creative Strategy book cover" width="768" height="1024">
+              <span class="book-shine" aria-hidden="true"></span>
+            </div>
+          </div>
           <div class="form-box">
             <p class="form-kicker">Get the free book</p>
             <form class="optin-form" id="bookForm">
@@ -718,14 +732,6 @@
             <p class="privacy">No spam. You will get the book and CSOS emails. Unsubscribe anytime.</p>
             <p class="form-status" id="formStatus">Done. Your download is ready.</p>
             <a class="download-link" id="downloadLink" href="/businessbook/The-Business-Side-of-Creative-Strategy.pdf" download>Download the book PDF</a>
-          </div>
-        </div>
-        <div class="hero-art" aria-label="Book preview">
-          <div class="book-backdrop">
-            <div class="book-object">
-              <img src="/assets/businessbook/book-cover.png" alt="The Business Side of Creative Strategy book cover" width="768" height="1024">
-              <span class="book-shine" aria-hidden="true"></span>
-            </div>
           </div>
         </div>
       </div>
