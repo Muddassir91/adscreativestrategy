@@ -708,7 +708,7 @@
   <script>
     const kitFormUrl = 'https://app.kit.com/forms/9426823/subscriptions';
     const kitTags = [19490154, 18483789];
-    const pdfUrl = '/businessbook/The-Business-Side-of-Creative-Strategy.pdf';
+    const thankYouUrl = '/businessbook/thank-you/';
 
     function attachForm(formId, statusId, linkId, buttonId) {
       const form = document.getElementById(formId);
@@ -737,11 +737,10 @@
           console.error('Opt-in error:', error);
         }
         status.style.display = 'block';
-        link.style.display = 'inline-flex';
         btn.textContent = 'Ready';
         window.setTimeout(function() {
-          window.location.href = pdfUrl;
-        }, 450);
+          window.location.href = thankYouUrl;
+        }, 350);
       });
     }
 
