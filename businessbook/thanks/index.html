@@ -97,18 +97,60 @@
     .subtitle {
       font-size: 1.18rem;
       color: var(--ink-soft);
-      margin: 0 0 36px;
+      margin: 0 0 22px;
     }
-    .subtitle .pill {
-      display: inline-block;
-      padding: 4px 10px;
-      margin: 0 2px;
+    .email-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 26px;
+      display: grid;
+      gap: 14px;
+    }
+    .email-list li {
+      padding: 18px 20px;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
       background: var(--paper-2);
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .email-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-family: "Changa One", "Impact", sans-serif;
+      font-size: 0.92rem;
+    }
+    .email-list b {
+      display: block;
+      font-size: 1.02rem;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .email-list .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      background: var(--white);
       border: 1px solid var(--rule);
       border-radius: 4px;
       font-family: "Changa One", "Impact", sans-serif;
-      font-size: 0.94rem;
+      font-size: 0.9rem;
       letter-spacing: 0.04em;
+      color: var(--teal-deep);
+    }
+    .instruction {
+      font-size: 1.04rem;
+      color: var(--ink);
+      margin: 0 0 36px;
+    }
+    .instruction em {
+      font-style: italic;
       color: var(--teal-deep);
     }
     .note {
@@ -158,7 +200,24 @@
     <div class="wrap">
       <span class="kicker">You are in</span>
       <h1>Success. Check your inbox in <em>2 minutes</em>.</h1>
-      <p class="subtitle">Look for an email titled <span class="pill">[Download] Business Side of Creative Strategy</span></p>
+      <p class="subtitle">You will receive two emails:</p>
+      <ol class="email-list">
+        <li>
+          <span class="email-num">1</span>
+          <div>
+            <b>One short confirmation email</b>
+            Click the link inside to confirm your subscription.
+          </div>
+        </li>
+        <li>
+          <span class="email-num">2</span>
+          <div>
+            <b>The other titled <span class="pill">[Download] Business Side of Creative Strategy</span></b>
+            Inside is your free book.
+          </div>
+        </li>
+      </ol>
+      <p class="instruction">Confirm your subscription in the <em>first</em> email and then get your free book inside the <em>second</em> one.</p>
       <div class="note">
         <b>Note</b>
         Do not forget to check your Promotions and Spam tabs. If you find the email there, drag it into your Primary inbox so the next ones land where you can see them.
