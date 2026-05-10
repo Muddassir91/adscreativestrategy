@@ -160,6 +160,37 @@
       line-height: 1.55;
       font-weight: 600;
     }
+    .bullet-list {
+      list-style: none;
+      display: grid;
+      gap: 18px;
+      margin: 28px 0 0;
+      padding: 0;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+    .bullet-list li {
+      position: relative;
+      padding-left: 26px;
+      max-width: 680px;
+    }
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--signal);
+      box-shadow: 0 0 20px rgba(36, 240, 210, 0.45);
+    }
+    .hero-bullets {
+      color: #dbe7e3;
+      font-size: clamp(1.04rem, 1.5vw, 1.22rem);
+    }
     .form-box {
       margin-top: 36px;
       max-width: 720px;
@@ -403,6 +434,14 @@
       line-height: 1.55;
       max-width: 560px;
     }
+    .learn-list small {
+      display: block;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.55;
+      max-width: 560px;
+      font-weight: 700;
+    }
     .sample-page {
       background: var(--soft);
       color: #111;
@@ -462,6 +501,15 @@
       color: var(--muted);
       font-size: 1.16rem;
       font-weight: 700;
+    }
+    .statement .bullet-list {
+      width: min(680px, 100%);
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    .statement .bullet-list li {
+      max-width: none;
     }
 
     .chapter-map {
@@ -562,6 +610,29 @@
       color: #53605c;
       font-weight: 650;
     }
+    .prompt-step ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: #53605c;
+      font-weight: 700;
+    }
+    .prompt-step li {
+      position: relative;
+      padding-left: 18px;
+    }
+    .prompt-step li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
 
     .final {
       padding: 128px 0;
@@ -652,7 +723,7 @@
         line-height: 1.5;
       }
       .subhead, .lede { font-size: 1rem; }
-      .subhead, .privacy, .proof-item span, .learn-list p, .fit-card li, .prompt-step p {
+      .subhead, .bullet-list, .privacy, .proof-item span, .learn-list p, .fit-card li, .prompt-step p {
         max-width: 100%;
         overflow-wrap: anywhere;
       }
@@ -711,7 +782,11 @@
         <div>
           <p class="eyebrow">Free CSOS business book</p>
           <h1><span class="line">The</span><span class="line">business</span><span class="line">side of</span><span class="line teal">creative</span><span class="line teal">strategy</span></h1>
-          <p class="subhead">If you already know the craft, this shows you how to package, price, sell, and deliver the work like a specialist buyers take seriously.</p>
+          <ul class="bullet-list hero-bullets">
+            <li>For creative strategists and copywriters who already know the craft.</li>
+            <li>Package, price, sell, and deliver strategy work like a specialist.</li>
+            <li>Use master prompts to build real business assets faster.</li>
+          </ul>
         </div>
         <div class="hero-art" aria-label="Book preview">
           <div class="book-backdrop">
@@ -752,8 +827,12 @@
           <h2>The craft is getting easier to learn. That is the problem.</h2>
         </div>
         <div>
-          <p class="lede">Thousands of new creative strategists are learning the same frameworks, studying the same ads, and using the same language. Soon, knowing the craft will not be enough to stand out.</p>
-          <p class="lede">The creative strategist who wins will know how to look expensive before the first call.</p>
+          <ul class="bullet-list">
+            <li>More creative strategists are learning the same frameworks.</li>
+            <li>More copywriters are moving into strategy.</li>
+            <li>Businesses will get choosy when the market gets crowded.</li>
+            <li>The strategist who wins will look expensive before the first call.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -768,21 +847,21 @@
               <span class="check">✓</span>
               <div>
                 <h3>Package your thinking.</h3>
-                <p>Move from “I help with ads” to a clear offer with a clear reason to buy.</p>
+                <small>Move from “I help with ads” to a clear offer with a clear reason to buy.</small>
               </div>
             </li>
             <li>
               <span class="check">✓</span>
               <div>
                 <h3>Price without shrinking.</h3>
-                <p>Build tiers, anchors, and scope that stop cheap comparisons.</p>
+                <small>Build tiers, anchors, and scope that stop cheap comparisons.</small>
               </div>
             </li>
             <li>
               <span class="check">✓</span>
               <div>
                 <h3>Deliver like a specialist.</h3>
-                <p>Use audits, calls, reports, and renewal systems that make strategy feel concrete.</p>
+                <small>Use audits, calls, reports, and renewal systems that make strategy feel concrete.</small>
               </div>
             </li>
           </ul>
@@ -801,7 +880,11 @@
     <section class="statement">
       <div class="wrap">
         <h2>If you sound like every other creative strategist, buyers will treat you like every other creative strategist.</h2>
-        <p>This book is for the copywriter or strategist who wants the market to see the operator behind the ideas.</p>
+        <ul class="bullet-list">
+          <li>Build a point of view buyers can remember.</li>
+          <li>Show the operator behind the ideas.</li>
+          <li>Stop sounding like another person who “does strategy.”</li>
+        </ul>
       </div>
     </section>
 
@@ -810,7 +893,11 @@
         <div class="section-head center">
           <p class="eyebrow">Chapter map</p>
           <h2>11 useful things inside.</h2>
-          <p class="lede center">Short, practical sections with page numbers so creative strategists can jump straight to the asset they need.</p>
+          <ul class="bullet-list center">
+            <li>Short sections.</li>
+            <li>Page numbers included.</li>
+            <li>Jump straight to the asset you need.</li>
+          </ul>
         </div>
         <div class="chapter-map">
           <div class="chapter-row"><b>01</b><strong>Find the three ceilings keeping your strategy work cheap.</strong><span>Page 8</span></div>
@@ -856,12 +943,16 @@
         <div class="section-head center">
           <p class="eyebrow">Master prompts included</p>
           <h2>The book is longer because the prompts do real work.</h2>
-          <p class="lede center">Paste them into ChatGPT or Claude. Answer the questions patiently. The prompts help you build the asset from your own answers.</p>
+          <ul class="bullet-list center">
+            <li>Paste the prompt into ChatGPT or Claude.</li>
+            <li>Answer the questions patiently.</li>
+            <li>Turn your answers into usable business assets.</li>
+          </ul>
         </div>
         <div class="prompt-steps">
-          <div class="prompt-step"><b>01</b><h3>Pick the phase.</h3><p>Offer, content, sales, or delivery. Start where your business feels weakest.</p></div>
-          <div class="prompt-step"><b>02</b><h3>Run the prompt.</h3><p>Use a fresh chat so the tool focuses on one job at a time.</p></div>
-          <div class="prompt-step"><b>03</b><h3>Turn answers into assets.</h3><p>Save your offer, price, audit, sales script, and delivery system.</p></div>
+          <div class="prompt-step"><b>01</b><h3>Pick the phase.</h3><ul><li>Offer, content, sales, or delivery.</li><li>Start where your business feels weakest.</li></ul></div>
+          <div class="prompt-step"><b>02</b><h3>Run the prompt.</h3><ul><li>Use a fresh chat.</li><li>Keep the tool focused on one job.</li></ul></div>
+          <div class="prompt-step"><b>03</b><h3>Turn answers into assets.</h3><ul><li>Save your offer, price, audit, sales script, and delivery system.</li></ul></div>
         </div>
       </div>
     </section>
@@ -871,7 +962,11 @@
         <div class="section-head center">
           <p class="eyebrow">Get the free book</p>
           <h2>Build the business side before the market gets louder.</h2>
-          <p class="lede center">Download the CSOS book and start turning creative strategy from a skill into a business.</p>
+          <ul class="bullet-list center">
+            <li>Get the free CSOS book.</li>
+            <li>Build your offer, pricing, sales, and delivery assets.</li>
+            <li>Start turning creative strategy from a skill into a business.</li>
+          </ul>
         </div>
         <div class="form-box">
           <p class="form-kicker">Get the free book</p>
