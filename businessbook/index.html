@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Business Side of Creative Strategy | Free CSOS Book</title>
+  <meta name="description" content="A free 106-page CSOS business playbook for creative strategists and intermediate copywriters who want to package, price, sell, and deliver higher-value strategy work.">
+  <meta property="og:title" content="The Business Side of Creative Strategy">
+  <meta property="og:description" content="Free CSOS business playbook with AI master prompts for creative strategists and intermediate copywriters.">
+  <meta property="og:image" content="https://adscreativestrategy.com/assets/businessbook/mockup-stack.png">
+  <meta property="og:url" content="https://adscreativestrategy.com/businessbook">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #0f766e;
+      --teal-dark: #0a4f4a;
+      --ink: #151515;
+      --muted: #525252;
+      --soft: #edf7f5;
+      --line: #dfe7e4;
+      --paper: #fbfcfa;
+      --white: #ffffff;
+      --danger: #7f1d1d;
+    }
+
+    * { box-sizing: border-box; min-width: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; }
+    .wrap {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      max-width: 1120px;
+    }
+    .nav {
+      border-bottom: 1px solid var(--line);
+      background: rgba(251, 252, 250, 0.92);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+    }
+    .nav-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+      text-decoration: none;
+    }
+    .brand strong {
+      font-family: "Archivo", sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+    }
+    .brand span {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .nav-cta {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      background: var(--ink);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 800;
+      border-radius: 6px;
+    }
+    .hero {
+      padding: 64px 0 44px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(110deg, rgba(237, 247, 245, 0.9), rgba(251, 252, 250, 0.92) 42%, rgba(251, 252, 250, 1)),
+        var(--paper);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 42px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 100%;
+      flex-wrap: wrap;
+      margin: 0 0 14px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--teal-dark);
+    }
+    .eyebrow::before {
+      content: "";
+      width: 44px;
+      height: 4px;
+      background: var(--teal);
+      display: inline-block;
+    }
+    h1, h2, h3 {
+      font-family: "Archivo", sans-serif;
+      line-height: 0.98;
+      letter-spacing: 0;
+      margin: 0;
+    }
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      max-width: 760px;
+      overflow-wrap: normal;
+    }
+    h1 .line { display: block; }
+    h1 .teal { color: var(--teal); }
+    .subhead {
+      max-width: 680px;
+      overflow-wrap: anywhere;
+      margin: 22px 0 0;
+      color: #333;
+      font-size: clamp(1.08rem, 2vw, 1.35rem);
+      line-height: 1.5;
+    }
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 26px 0;
+      max-width: 720px;
+    }
+    .hero-point {
+      border-left: 4px solid var(--teal);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 12px 13px;
+      min-height: 78px;
+      font-weight: 800;
+      font-size: 0.94rem;
+    }
+    .form-box {
+      max-width: 620px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 14px;
+      border-radius: 8px;
+      box-shadow: 0 22px 60px rgba(10, 79, 74, 0.11);
+    }
+    .optin-form {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr auto;
+      gap: 10px;
+    }
+    label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+    input {
+      width: 100%;
+      min-height: 52px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0 14px;
+      font: inherit;
+      background: #fff;
+      color: var(--ink);
+    }
+    input:focus {
+      outline: 3px solid rgba(15, 118, 110, 0.18);
+      border-color: var(--teal);
+    }
+    .btn {
+      min-height: 52px;
+      border: 0;
+      border-radius: 6px;
+      padding: 0 22px;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      background: var(--teal);
+      color: var(--white);
+      white-space: nowrap;
+    }
+    .btn:hover { background: var(--teal-dark); }
+    .btn:disabled { opacity: 0.68; cursor: wait; }
+    .privacy {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .form-status {
+      margin: 10px 0 0;
+      color: var(--teal-dark);
+      font-weight: 800;
+      display: none;
+    }
+    .download-link {
+      display: none;
+      margin-top: 12px;
+      color: var(--teal-dark);
+      font-weight: 900;
+    }
+    .hero-art {
+      position: relative;
+      min-height: 540px;
+      display: grid;
+      align-items: center;
+    }
+    .hero-art img {
+      width: min(640px, 100%);
+      margin: 0 auto;
+      filter: drop-shadow(0 34px 48px rgba(10, 79, 74, 0.12));
+    }
+    .proof-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .proof-item {
+      background: var(--white);
+      padding: 22px 20px;
+      min-height: 112px;
+    }
+    .proof-item strong {
+      font-family: "Archivo", sans-serif;
+      display: block;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      line-height: 1;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .proof-item span {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    section {
+      padding: 62px 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+    section.white { background: var(--white); }
+    .section-head {
+      max-width: 820px;
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-size: clamp(2.15rem, 5vw, 4.5rem);
+      max-width: 850px;
+    }
+    .section-lede {
+      max-width: 760px;
+      color: #333;
+      font-size: 1.1rem;
+      margin: 16px 0 0;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .callout {
+      background: var(--soft);
+      border-left: 5px solid var(--teal);
+      padding: 22px;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+    .plain-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .plain-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      color: #242424;
+    }
+    .plain-list b {
+      color: var(--teal);
+      font-family: "Archivo", sans-serif;
+    }
+    .book-intro {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+      gap: 36px;
+      align-items: center;
+    }
+    .book-intro img {
+      border-radius: 10px;
+      background: var(--soft);
+    }
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      counter-reset: benefit;
+      margin-top: 28px;
+    }
+    .benefit {
+      counter-increment: benefit;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 150px;
+      display: grid;
+      gap: 8px;
+    }
+    .benefit::before {
+      content: counter(benefit, decimal-leading-zero);
+      font-family: "Archivo", sans-serif;
+      color: var(--teal);
+      font-weight: 900;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+    }
+    .benefit h3 {
+      font-size: 1.18rem;
+      line-height: 1.15;
+    }
+    .benefit p {
+      margin: 0;
+      color: #333;
+      font-size: 0.98rem;
+    }
+    .page-ref {
+      display: inline-flex;
+      width: fit-content;
+      color: var(--teal-dark);
+      background: var(--soft);
+      border: 1px solid rgba(15, 118, 110, 0.18);
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+    .audience-grid, .different-grid, .mockups {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .tile {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 190px;
+    }
+    .tile h3 {
+      font-size: 1.25rem;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      color: var(--teal-dark);
+    }
+    .tile p {
+      color: #333;
+      margin: 0;
+    }
+    .not-for .tile { border-color: #ead7d7; }
+    .not-for .tile h3 { color: var(--danger); }
+    .mockups {
+      align-items: stretch;
+    }
+    .mockup {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .mockup img {
+      border-radius: 8px;
+      background: var(--soft);
+      aspect-ratio: 14 / 11;
+      object-fit: cover;
+    }
+    .mockup span {
+      display: block;
+      padding: 10px 4px 4px;
+      font-weight: 800;
+      color: var(--teal-dark);
+      font-size: 0.94rem;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      counter-reset: step;
+    }
+    .step {
+      counter-increment: step;
+      border-top: 5px solid var(--teal);
+      background: var(--white);
+      padding: 20px;
+      min-height: 180px;
+    }
+    .step::before {
+      content: "Step " counter(step);
+      display: block;
+      color: var(--teal-dark);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      margin-bottom: 14px;
+    }
+    .step h3 {
+      font-size: 1.15rem;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .step p { margin: 0; color: #333; }
+    .final {
+      background: var(--ink);
+      color: var(--white);
+      border-bottom: 0;
+    }
+    .final h2 { color: var(--white); max-width: 780px; }
+    .final .section-lede { color: rgba(255, 255, 255, 0.76); }
+    .final .form-box { box-shadow: none; }
+    footer {
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 24px 0 36px;
+      font-size: 0.9rem;
+    }
+    footer a { color: #fff; text-decoration: none; }
+    .desktop-only { display: inline; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .split, .book-intro { grid-template-columns: 1fr; }
+      .hero-art { min-height: auto; }
+      .proof-strip, .audience-grid, .different-grid, .mockups, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .benefits { grid-template-columns: 1fr; }
+      .optin-form { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+      .nav-inner { min-height: 62px; }
+      .nav .wrap,
+      .hero .wrap {
+        width: min(320px, calc(100vw - 28px));
+        max-width: min(320px, calc(100vw - 28px));
+        margin-left: 14px;
+        margin-right: auto;
+      }
+      .brand span, .desktop-only { display: none; }
+      .nav-cta { padding: 0 10px; font-size: 0; min-height: 40px; }
+      .nav-cta::after { content: "Get book"; font-size: 0.82rem; }
+      .hero { padding: 42px 0 34px; }
+      h1 {
+        font-size: clamp(2.72rem, 11.5vw, 3.35rem);
+        line-height: 1.02;
+        max-width: 100%;
+      }
+      .eyebrow { font-size: 0.72rem; gap: 8px; }
+      .eyebrow::before { width: 34px; height: 3px; }
+      .subhead { font-size: 1rem; }
+      .hero-point { overflow-wrap: anywhere; }
+      .hero-grid,
+      .hero-grid > *,
+      .subhead,
+      .hero-point,
+      .privacy {
+        max-width: 100%;
+      }
+      .form-box,
+      .hero-points,
+      .hero-art,
+      .hero-art img {
+        width: 100%;
+        max-width: min(320px, calc(100vw - 28px));
+      }
+      h2 { font-size: clamp(2rem, 11vw, 3.2rem); }
+      .hero-points, .proof-strip, .audience-grid, .different-grid, .mockups, .steps { grid-template-columns: 1fr; }
+      .hero-point { min-height: auto; }
+      section { padding: 46px 0; }
+      .tile, .step, .benefit { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/quiz">
+        <strong>CSOS</strong>
+        <span>Creative Strategy Operating System</span>
+      </a>
+      <a class="nav-cta" href="#download">Download Now</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="download">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Free 106-page business playbook</p>
+          <h1><span class="line">The business</span><span class="line">side of</span><span class="line teal">creative</span><span class="line teal">strategy</span></h1>
+          <p class="subhead">A practical CSOS book for creative strategists and intermediate copywriters who already know the craft, but still need to package, price, sell, and deliver strategy work like a real business.</p>
+          <div class="hero-points" aria-label="Book promise">
+            <div class="hero-point">Offer, positioning, and pricing that stop cheap comparisons.</div>
+            <div class="hero-point">Sales-call and delivery systems that make renewal easier.</div>
+            <div class="hero-point">AI master prompts that build the assets with you.</div>
+          </div>
+          <div class="form-box">
+            <form class="optin-form" id="bookForm">
+              <label for="name">First name</label>
+              <input id="name" name="name" type="text" autocomplete="given-name" placeholder="First name" required>
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="Email address" required>
+              <button class="btn" id="submitBtn" type="submit">Download Now</button>
+            </form>
+            <p class="privacy">No spam. You will get the book and CSOS emails. Unsubscribe anytime.</p>
+            <p class="form-status" id="formStatus">Done. Your download is ready.</p>
+            <a class="download-link" id="downloadLink" href="/businessbook/The-Business-Side-of-Creative-Strategy.pdf" download>Download the book PDF</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Book mockup">
+          <img src="/assets/businessbook/mockup-angled.png" alt="The Business Side of Creative Strategy book mockup" width="1400" height="1100">
+        </div>
+      </div>
+    </section>
+
+    <div class="proof-strip" aria-label="Book proof points">
+      <div class="proof-item"><strong>106</strong><span>pages, kept short for actual use</span></div>
+      <div class="proof-item"><strong>4</strong><span>AI master prompts built into the book</span></div>
+      <div class="proof-item"><strong>13</strong><span>chapters focused on business assets</span></div>
+      <div class="proof-item"><strong>0</strong><span>fluffy theory lectures about the craft</span></div>
+    </div>
+
+    <section class="white">
+      <div class="wrap split">
+        <div class="section-head">
+          <p class="eyebrow">Why this matters now</p>
+          <h2>The skill side is about to get crowded.</h2>
+        </div>
+        <div>
+          <p class="section-lede">As you read this, thousands of new creative strategists are learning the craft. Hooks. Briefs. Ad libraries. Testing language. The basics are becoming easier to access.</p>
+          <div class="callout">When the market gets flooded with people who can talk creative strategy, buyers get choosy. The strategist who wins is the one who can look like the go-to expert before the first call.</div>
+          <ul class="plain-list" style="margin-top:18px;">
+            <li><b>01</b><span>Skill gets you into the category. Business positioning gets you remembered inside it.</span></li>
+            <li><b>02</b><span>More creative strategists means more comparison shopping. Your offer has to escape the spreadsheet.</span></li>
+            <li><b>03</b><span>Businesses do not just hire the person who knows ads. They hire the person who makes the problem feel clear.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap book-intro">
+        <img src="/assets/businessbook/mockup-flat.png" alt="Flat mockup of The Business Side of Creative Strategy" width="1400" height="1100" loading="lazy">
+        <div>
+          <p class="eyebrow">Introducing the book</p>
+          <h2>The Business Side of Creative Strategy</h2>
+          <p class="section-lede">This started as a practical answer to one annoying gap: creative strategists can learn the craft everywhere, but very few are taught how to turn that skill into a business buyers take seriously.</p>
+          <p class="section-lede">So CSOS built the missing layer: offer, positioning, pricing, content, outreach, sales calls, objections, retainers, delivery, and prompts that force the work out of your head and onto the page.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="white">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">What you get inside</p>
+          <h2>11 assets your future clients can actually feel.</h2>
+          <p class="section-lede">Not “learn more about creative strategy.” Build the business layer around the skill.</p>
+        </div>
+        <div class="benefits">
+          <div class="benefit"><h3>Find the three ceilings keeping you cheap.</h3><p>See why your offer, proof, and sales posture are quietly holding your rate down.</p><span class="page-ref">Page 8</span></div>
+          <div class="benefit"><h3>Build an offer that stops price shopping.</h3><p>Turn “I make ads” into a specific diagnostic or sprint buyers can understand fast.</p><span class="page-ref">Page 12</span></div>
+          <div class="benefit"><h3>Write a positioning sentence that calls out the buyer.</h3><p>Make the right prospect feel named, not vaguely included.</p><span class="page-ref">Page 17</span></div>
+          <div class="benefit"><h3>Price the work without apologizing.</h3><p>Pick the right anchor, build three tiers, and present the number without leaking confidence.</p><span class="page-ref">Page 22</span></div>
+          <div class="benefit"><h3>Use the Phase 1 master prompt to build the first assets.</h3><p>Walk through offer, position, and pricing with a prompt that refuses vague answers.</p><span class="page-ref">Page 26</span></div>
+          <div class="benefit"><h3>Find a voice buyers remember.</h3><p>Stop sounding like every other strategist who learned from the same internet pile.</p><span class="page-ref">Page 35</span></div>
+          <div class="benefit"><h3>Build content that attracts clients, not applause.</h3><p>Measure posts by qualified conversations, not likes from people who will never buy.</p><span class="page-ref">Page 39</span></div>
+          <div class="benefit"><h3>Create a 100-day content calendar.</h3><p>Remove the morning “what do I post?” tax and build a repeatable publishing rhythm.</p><span class="page-ref">Page 44</span></div>
+          <div class="benefit"><h3>Start conversations like a peer.</h3><p>Replace needy DMs with account-specific observations that sound like strategy, not begging.</p><span class="page-ref">Page 48</span></div>
+          <div class="benefit"><h3>Run a creative audit that proves you can think.</h3><p>Use the audit as the proof asset before the buyer ever sees a proposal.</p><span class="page-ref">Page 62</span></div>
+          <div class="benefit"><h3>Turn delivery into renewal.</h3><p>Use diagnosis, weekly reporting, and the first 30 days to make staying with you feel obvious.</p><span class="page-ref">Page 77</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Book cover mockups</p>
+          <h2>Use the one that makes the page feel most premium.</h2>
+        </div>
+        <div class="mockups">
+          <div class="mockup"><img src="/assets/businessbook/mockup-angled.png" alt="Angled book cover mockup" width="1400" height="1100" loading="lazy"><span>Angled hero mockup</span></div>
+          <div class="mockup"><img src="/assets/businessbook/mockup-flat.png" alt="Flat book cover mockup" width="1400" height="1100" loading="lazy"><span>Clean editorial mockup</span></div>
+          <div class="mockup"><img src="/assets/businessbook/mockup-stack.png" alt="Stacked book cover mockup" width="1400" height="1100" loading="lazy"><span>Moat concept mockup</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="white">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Who it is for</p>
+          <h2>For the strategist identity you are building.</h2>
+        </div>
+        <div class="audience-grid">
+          <div class="tile"><h3>New creative strategists</h3><p>You know the basics, but you do not yet have a clean offer, price, or sales process.</p></div>
+          <div class="tile"><h3>Intermediate copywriters</h3><p>You can write the assets. Now you want to be paid for the thinking behind them.</p></div>
+          <div class="tile"><h3>Performance creatives</h3><p>You understand ads, angles, hooks, and tests. This helps you package that judgment as a business.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="not-for">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Who it is not for</p>
+          <h2>Do not download this if you need Creative Strategy 101.</h2>
+        </div>
+        <div class="audience-grid">
+          <div class="tile"><h3>You do not know the basics yet</h3><p>If briefs, hooks, ad libraries, and creative tests feel new, learn the skill side first.</p></div>
+          <div class="tile"><h3>You want theory to collect</h3><p>This book makes you build assets. It is annoying on purpose.</p></div>
+          <div class="tile"><h3>You want to stay a task-taker</h3><p>If you only want someone to hand you ad concepts, this will feel like too much business work.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="white">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">How it is different</p>
+          <h2>It does not teach the craft from zero. It builds the business around the craft.</h2>
+        </div>
+        <div class="different-grid">
+          <div class="tile"><h3>Business side first</h3><p>Offer, positioning, price, content, outreach, calls, objections, delivery, and renewal.</p></div>
+          <div class="tile"><h3>Master prompts included</h3><p>The prompts take you from vague answers to usable assets quickly, based on your own situation.</p></div>
+          <div class="tile"><h3>Identity shift built in</h3><p>The book pushes you out of “please pick me” mode and into strategist with a point of view.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">How to use it</p>
+          <h2>Download it. Run the prompts. Answer patiently.</h2>
+          <p class="section-lede">The prompts were built after multiple iterations. They are not there to impress you. They are there to question you until the asset is useful.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><h3>Read one phase.</h3><p>Do not binge the whole book like content. Read the phase tied to the asset you need.</p></div>
+          <div class="step"><h3>Copy the master prompt.</h3><p>Paste it into ChatGPT or Claude as the first message in a fresh chat.</p></div>
+          <div class="step"><h3>Answer one question at a time.</h3><p>The prompt will push back when you are vague. That is the point. Stay with it.</p></div>
+          <div class="step"><h3>Save the output.</h3><p>Put the offer, position, price, scripts, audit, and delivery templates into your working doc.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow">Get the free book</p>
+          <h2>Stop being another creative strategist in the pile.</h2>
+          <p class="section-lede">Download the CSOS business playbook and build the side of creative strategy most new strategists ignore until the market forces them to care.</p>
+        </div>
+        <div class="form-box">
+          <form class="optin-form" id="bookFormBottom">
+            <label for="nameBottom">First name</label>
+            <input id="nameBottom" name="name" type="text" autocomplete="given-name" placeholder="First name" required>
+            <label for="emailBottom">Email address</label>
+            <input id="emailBottom" name="email" type="email" autocomplete="email" placeholder="Email address" required>
+            <button class="btn" id="submitBtnBottom" type="submit">Download Now</button>
+          </form>
+          <p class="privacy">No spam. You will get the book and CSOS emails. Unsubscribe anytime.</p>
+          <p class="form-status" id="formStatusBottom">Done. Your download is ready.</p>
+          <a class="download-link" id="downloadLinkBottom" href="/businessbook/The-Business-Side-of-Creative-Strategy.pdf" download>Download the book PDF</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Creative Strategy Operating System. Built for creative strategists and copywriters moving from skill to business. <a href="/quiz">Take the quiz</a>.</div>
+  </footer>
+
+  <script>
+    const workerUrl = 'https://csos-scorer.m-a-rab2012.workers.dev';
+    const pdfUrl = '/businessbook/The-Business-Side-of-Creative-Strategy.pdf';
+
+    function attachForm(formId, statusId, linkId, buttonId) {
+      const form = document.getElementById(formId);
+      const status = document.getElementById(statusId);
+      const link = document.getElementById(linkId);
+      const btn = document.getElementById(buttonId);
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const data = new FormData(form);
+        const name = String(data.get('name') || '').trim();
+        const email = String(data.get('email') || '').trim();
+        if (!name || !email) return;
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        try {
+          await fetch(workerUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name,
+              email,
+              tier: 'BusinessBook',
+              score: 0,
+              source: 'businessbook'
+            })
+          });
+        } catch (error) {
+          console.error('Opt-in error:', error);
+        }
+        status.style.display = 'block';
+        link.style.display = 'inline-flex';
+        btn.textContent = 'Ready';
+        window.setTimeout(function() {
+          window.location.href = pdfUrl;
+        }, 450);
+      });
+    }
+
+    attachForm('bookForm', 'formStatus', 'downloadLink', 'submitBtn');
+    attachForm('bookFormBottom', 'formStatusBottom', 'downloadLinkBottom', 'submitBtnBottom');
+  </script>
+</body>
+</html>
