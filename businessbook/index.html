@@ -360,7 +360,7 @@
       font-size: 0.8rem;
       font-weight: 900;
     }
-    .audience-grid, .different-grid, .mockups {
+    .audience-grid, .different-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
@@ -384,28 +384,6 @@
     }
     .not-for .tile { border-color: #ead7d7; }
     .not-for .tile h3 { color: var(--danger); }
-    .mockups {
-      align-items: stretch;
-    }
-    .mockup {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 10px;
-    }
-    .mockup img {
-      border-radius: 8px;
-      background: var(--soft);
-      aspect-ratio: 14 / 11;
-      object-fit: cover;
-    }
-    .mockup span {
-      display: block;
-      padding: 10px 4px 4px;
-      font-weight: 800;
-      color: var(--teal-dark);
-      font-size: 0.94rem;
-    }
     .steps {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -455,7 +433,7 @@
     @media (max-width: 900px) {
       .hero-grid, .split, .book-intro { grid-template-columns: 1fr; }
       .hero-art { min-height: auto; }
-      .proof-strip, .audience-grid, .different-grid, .mockups, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .proof-strip, .audience-grid, .different-grid, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .benefits { grid-template-columns: 1fr; }
       .optin-form { grid-template-columns: 1fr; }
       .btn { width: 100%; }
@@ -498,7 +476,7 @@
         max-width: min(320px, calc(100vw - 28px));
       }
       h2 { font-size: clamp(2rem, 11vw, 3.2rem); }
-      .hero-points, .proof-strip, .audience-grid, .different-grid, .mockups, .steps { grid-template-columns: 1fr; }
+      .hero-points, .proof-strip, .audience-grid, .different-grid, .steps { grid-template-columns: 1fr; }
       .hero-point { min-height: auto; }
       section { padding: 46px 0; }
       .tile, .step, .benefit { min-height: auto; }
@@ -603,20 +581,6 @@
           <div class="benefit"><h3>Start conversations like a peer.</h3><p>Replace needy DMs with account-specific observations that sound like strategy, not begging.</p><span class="page-ref">Page 48</span></div>
           <div class="benefit"><h3>Run a creative audit that proves you can think.</h3><p>Use the audit as the proof asset before the buyer ever sees a proposal.</p><span class="page-ref">Page 62</span></div>
           <div class="benefit"><h3>Turn delivery into renewal.</h3><p>Use diagnosis, weekly reporting, and the first 30 days to make staying with you feel obvious.</p><span class="page-ref">Page 77</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Book cover mockups</p>
-          <h2>Use the one that makes the page feel most premium.</h2>
-        </div>
-        <div class="mockups">
-          <div class="mockup"><img src="/assets/businessbook/mockup-angled.png" alt="Angled book cover mockup" width="1400" height="1100" loading="lazy"><span>Angled hero mockup</span></div>
-          <div class="mockup"><img src="/assets/businessbook/mockup-flat.png" alt="Flat book cover mockup" width="1400" height="1100" loading="lazy"><span>Clean editorial mockup</span></div>
-          <div class="mockup"><img src="/assets/businessbook/mockup-stack.png" alt="Stacked book cover mockup" width="1400" height="1100" loading="lazy"><span>Moat concept mockup</span></div>
         </div>
       </div>
     </section>
