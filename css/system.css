@@ -1,0 +1,445 @@
+/* =================================================================
+   CSOS / abdurrub.com — Shared Design System
+   Hosted at: https://adscreativestrategy.com/css/system.css
+   Used by both adscreativestrategy.com and abdurrub.com.
+
+   Tokens
+     Color    : white #ffffff, teal #008080, near-black #0d0f0e
+     Display  : Changa One
+     Body     : PT Serif
+     Spacing  : 18px base, 1.65 line-height
+================================================================= */
+
+:root {
+  --paper: #ffffff;
+  --paper-2: #f3f8f8;
+  --ink: #0d0f0e;
+  --ink-soft: #2a2f2d;
+  --muted: #5d6664;
+  --rule: rgba(0, 122, 122, 0.18);
+  --teal: #008080;
+  --teal-deep: #004d4d;
+  --teal-bright: #00a8a3;
+  --white: #ffffff;
+  --black: #0d0f0e;
+}
+
+* { box-sizing: border-box; min-width: 0; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "PT Serif", Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--teal); text-decoration: underline; }
+p { margin: 0 0 1.1em; }
+
+/* ---------- Containers ---------- */
+.wrap {
+  width: min(1080px, calc(100vw - 48px));
+  margin: 0 auto;
+}
+.narrow {
+  width: min(720px, calc(100vw - 48px));
+  margin: 0 auto;
+}
+.center { text-align: center; }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--rule);
+  backdrop-filter: blur(14px);
+}
+.nav-inner {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-family: "Changa One", "Impact", sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+}
+.nav-links a:hover { color: var(--teal); }
+.nav-links a.active { color: var(--teal); }
+.brand {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  color: var(--teal);
+}
+.brand strong {
+  font-family: "Changa One", "Impact", sans-serif;
+  letter-spacing: 0.16em;
+  font-size: 1.05rem;
+}
+.brand span {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.nav-cta {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--teal);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: "Changa One", "Impact", sans-serif;
+  letter-spacing: 0.08em;
+  font-size: 0.92rem;
+}
+.nav-cta:hover { background: var(--teal-deep); color: var(--paper); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  padding: 0 36px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--teal);
+  color: var(--white);
+  font-family: "Changa One", "Impact", sans-serif;
+  letter-spacing: 0.08em;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(0, 77, 77, 0.22);
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+.btn:hover { background: var(--teal-deep); transform: translateY(-1px); }
+.btn:disabled { opacity: 0.6; cursor: wait; }
+.btn--block { width: 100%; }
+.btn--ghost {
+  background: transparent;
+  color: var(--teal);
+  border: 2px solid var(--teal);
+  box-shadow: none;
+}
+.btn--ghost:hover { background: var(--teal); color: var(--white); }
+
+/* ---------- Typography components ---------- */
+.display {
+  font-family: "Changa One", "Impact", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 1.04;
+  margin: 0;
+  color: var(--ink);
+}
+.display em {
+  font-style: italic;
+  color: var(--teal);
+}
+h1.display { font-size: clamp(2.4rem, 5.4vw, 3.8rem); }
+h2.display { font-size: clamp(2rem, 4.4vw, 3.2rem); }
+h3.display { font-size: clamp(1.4rem, 2.8vw, 1.9rem); }
+.kicker {
+  font-family: "Changa One", "Impact", sans-serif;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  font-size: 0.95rem;
+  margin: 0 0 14px;
+  display: block;
+}
+.eyebrow {
+  font-family: "Changa One", "Impact", sans-serif;
+  letter-spacing: 0.18em;
+  color: var(--teal);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  display: block;
+}
+.lede {
+  font-size: 1.18rem;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin: 22px 0 0;
+}
+.center .lede { margin-left: auto; margin-right: auto; }
+.rule {
+  width: 64px;
+  height: 4px;
+  background: var(--teal);
+  border: 0;
+  margin: 0 0 22px;
+}
+.rule.center { margin-left: auto; margin-right: auto; }
+
+/* ---------- Sections ---------- */
+section {
+  padding: 96px 0;
+  background: var(--paper);
+}
+section.alt { background: var(--paper-2); }
+section.dark {
+  background: var(--black);
+  color: var(--white);
+}
+section.dark .display,
+section.dark .kicker { color: var(--white); }
+section.dark .display em { color: var(--teal-bright); }
+section.dark .lede,
+section.dark p { color: rgba(255, 255, 255, 0.84); }
+section.dark .bullet-list li,
+section.dark .bundle-list li { color: var(--white); }
+section.dark .bullet-list li::before,
+section.dark .bundle-list li::before { color: var(--teal-bright); }
+
+/* ---------- Bullet lists ---------- */
+.bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+  display: grid;
+  gap: 18px;
+  color: var(--ink);
+  font-size: 1.06rem;
+}
+.bullet-list li {
+  position: relative;
+  padding-left: 26px;
+  max-width: 680px;
+}
+.bullet-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.bundle-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px;
+  display: grid;
+  gap: 12px;
+}
+.bundle-list li {
+  padding-left: 28px;
+  position: relative;
+  color: var(--ink);
+  font-size: 1.04rem;
+}
+.bundle-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--teal);
+  font-weight: 700;
+  font-family: "PT Serif", serif;
+}
+.fasc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 22px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.fasc-list li {
+  padding-left: 30px;
+  position: relative;
+  font-size: 1.1rem;
+  line-height: 1.62;
+  color: var(--ink);
+}
+.fasc-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--teal);
+  font-size: 1.05rem;
+  line-height: 1.62;
+}
+.fasc-list li b {
+  font-weight: 700;
+  color: var(--teal-deep);
+}
+.page-tag {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 36px;
+  box-shadow: 0 22px 44px rgba(0, 77, 77, 0.08);
+}
+.card .kicker { font-size: 0.85rem; }
+.card .lede { font-size: 1.04rem; margin-top: 14px; }
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+.card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* ---------- Form ---------- */
+.form-box {
+  max-width: 520px;
+  margin: 36px auto 0;
+  padding: 28px;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: 0 30px 60px rgba(0, 77, 77, 0.12);
+}
+.form-kicker {
+  margin: 0 0 18px;
+  color: var(--teal);
+  font-family: "Changa One", "Impact", sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 0.88rem;
+  text-align: center;
+}
+.optin-form {
+  display: grid;
+  gap: 12px;
+}
+.optin-form label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+.optin-form input {
+  width: 100%;
+  min-height: 56px;
+  border: 1px solid rgba(0, 122, 122, 0.28);
+  border-radius: 4px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--black);
+  background: var(--white);
+}
+.optin-form input:focus {
+  outline: 3px solid rgba(0, 128, 128, 0.16);
+  border-color: var(--teal);
+}
+.privacy {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+  font-style: italic;
+}
+.form-status,
+.download-link {
+  display: none;
+  margin: 14px 0 0;
+  color: var(--teal);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ---------- Sticky CTA pill ---------- */
+.sticky-cta {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 30;
+  min-height: 52px;
+  padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--teal);
+  color: var(--white);
+  text-decoration: none;
+  font-family: "Changa One", "Impact", sans-serif;
+  letter-spacing: 0.08em;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  box-shadow: 0 18px 40px rgba(0, 77, 77, 0.32);
+}
+.sticky-cta:hover { background: var(--teal-deep); color: var(--white); }
+
+/* ---------- Footer ---------- */
+footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--rule);
+  background: var(--paper-2);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+footer a {
+  color: var(--teal);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 920px) {
+  .card-grid-2,
+  .card-grid-3 { grid-template-columns: 1fr; gap: 22px; }
+  section { padding: 72px 0; }
+}
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .wrap,
+  .narrow { width: min(100%, calc(100vw - 32px)); }
+  .nav-inner { min-height: 60px; }
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 0.78rem; }
+  .brand span { display: none; }
+  .nav-cta { min-height: 40px; padding: 0 14px; font-size: 0.84rem; }
+  .btn { min-height: 56px; padding: 0 24px; font-size: 1rem; }
+  .form-box { padding: 20px; }
+  .sticky-cta { right: 12px; bottom: 12px; padding: 0 16px; font-size: 0.84rem; }
+  footer .wrap { display: grid; }
+}

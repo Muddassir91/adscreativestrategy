@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSOS — The Daily Creative Strategy Newsletter</title>
+  <meta name="description" content="A daily newsletter, a free book, and a skills quiz for creative strategists and copywriters who want to build a real service-based business, not collect more frameworks.">
+  <meta property="og:title" content="CSOS — Creative Strategy Operating System">
+  <meta property="og:description" content="A daily newsletter for creative strategists who want a real business, not another framework to read once and forget.">
+  <meta property="og:image" content="https://adscreativestrategy.com/assets/businessbook/mockup-hero.png">
+  <meta property="og:url" content="https://adscreativestrategy.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/system.css">
+  <style>
+    /* Page-specific overrides only. Core system loads from /css/system.css */
+    .hero-csos {
+      padding: 80px 0 56px;
+      background: var(--paper);
+    }
+    .hero-csos .display {
+      font-size: clamp(2.4rem, 5.4vw, 4.4rem);
+      max-width: 880px;
+    }
+    .hero-csos .lede { max-width: 720px; }
+    .hero-cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+    .product-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      margin-top: 24px;
+    }
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 36px;
+      display: grid;
+      gap: 20px;
+      box-shadow: 0 22px 44px rgba(0, 77, 77, 0.08);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(0, 77, 77, 0.14);
+    }
+    .product-card .product-art {
+      aspect-ratio: 4 / 3;
+      background: var(--paper-2);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .product-card .product-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 18px;
+    }
+    .product-tag {
+      font-family: "Changa One", "Impact", sans-serif;
+      letter-spacing: 0.12em;
+      color: var(--teal);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+    }
+    .product-card h3.display { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
+    .product-card p {
+      color: var(--ink-soft);
+      font-size: 1.04rem;
+      margin: 0;
+    }
+    .product-card .btn { min-height: 56px; font-size: 1rem; }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 64px;
+      align-items: center;
+    }
+    .inbox-shot {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0, 77, 77, 0.18);
+    }
+    @media (max-width: 920px) {
+      .hero-csos { padding: 56px 0 40px; }
+      .product-cards { grid-template-columns: 1fr; }
+      .mission-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">
+        <strong>CSOS</strong>
+        <span>Creative Strategy Operating System</span>
+      </a>
+      <div class="nav-links">
+        <a href="#newsletter">Newsletter</a>
+        <a href="/businessbook/">Book</a>
+        <a href="/quiz/">Quiz</a>
+        <a href="/sprint/">Sprint</a>
+        <a class="nav-cta" href="#newsletter">Join Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero-csos">
+      <div class="wrap center">
+        <span class="eyebrow">Creative Strategy Operating System</span>
+        <h1 class="display">The daily newsletter for creative strategists who want a <em>real business</em>, not another framework.</h1>
+        <p class="lede">One short email every weekday. One move you can run inside your business that day. Built for strategists and copywriters who already know the craft and want to get paid for it.</p>
+        <div class="hero-cta-row" style="justify-content: center;">
+          <a class="btn" href="#newsletter">Join the daily newsletter</a>
+          <a class="btn btn--ghost" href="#products">See what's inside</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="alt" id="products">
+      <div class="wrap">
+        <div class="center" style="margin-bottom: 56px;">
+          <span class="kicker">Two ways in</span>
+          <h2 class="display">Pick the door that fits how you <em>learn best</em>.</h2>
+          <p class="lede">Both lead to the same daily newsletter. Both are free. No upsell, no paywall, no "join the $97 community to unlock it."</p>
+        </div>
+        <div class="product-cards">
+
+          <article class="product-card">
+            <div class="product-art">
+              <img src="/assets/businessbook/mockup-flat.png" alt="The Business Side of Creative Strategy book mockup">
+            </div>
+            <span class="product-tag">Free book · 106 pages</span>
+            <h3 class="display">The Business Side of <em>Creative Strategy</em></h3>
+            <p>A 106-page playbook for packaging, pricing, and selling strategy work like a specialist. Includes a library of Smart AI Prompts that build a high ticket offer, premium positioning, and a marketing plan for you.</p>
+            <a class="btn" href="/businessbook/">Download the free book</a>
+          </article>
+
+          <article class="product-card">
+            <div class="product-art" style="background: var(--black);">
+              <div style="text-align: center; padding: 32px;">
+                <div style="font-family: 'Changa One', sans-serif; font-size: 4.2rem; color: var(--teal-bright); line-height: 1;">A-</div>
+                <div style="font-family: 'Changa One', sans-serif; letter-spacing: 0.16em; color: var(--white); font-size: 0.92rem; margin-top: 12px;">STRATEGIST</div>
+                <div style="color: rgba(255,255,255,0.6); font-style: italic; font-size: 0.92rem; margin-top: 8px;">Your score, in 3 minutes</div>
+              </div>
+            </div>
+            <span class="product-tag">Free quiz · 10 questions</span>
+            <h3 class="display">The Creative Strategy <em>Skills Test</em></h3>
+            <p>Ten questions that place you on the Writer / Student / Practitioner / Strategist scale. AI scored, no fluff. You get a tier-matched report and a clear sense of which moves to run first.</p>
+            <a class="btn" href="/quiz/">Take the quiz</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap mission-grid">
+        <div>
+          <span class="kicker">What is CSOS?</span>
+          <h2 class="display">A creative strategy business with one mission. Help new strategists actually <em>get paid</em> for the work.</h2>
+          <hr class="rule">
+          <p>CSOS started after theoretical content began flooding the online space. Endless Twitter threads. Carousel after carousel. YouTube essays about hooks. A new framework every week with no business behind it.</p>
+          <p>Meanwhile, new creative strategists were drowning in opinions and guessing at how to actually get paid for the work.</p>
+          <p>CSOS is the answer. We publish a daily newsletter. We build books, smart AI prompts, and assets that help new strategists launch real service based businesses with creative strategy. Not theory. Not another framework to read once and forget.</p>
+        </div>
+        <div>
+          <img class="inbox-shot" src="/assets/businessbook/mockup-inbox.png" alt="Daily CSOS newsletter inbox preview">
+        </div>
+      </div>
+    </section>
+
+    <section class="dark" id="newsletter">
+      <div class="narrow center">
+        <span class="kicker">Join free</span>
+        <h2 class="display">One short email every weekday. <em>One move</em> you can run that day.</h2>
+        <p class="lede" style="margin-top: 22px;">Pricing rewrites. Positioning angles. Outreach scripts. Renewal plays. Read it, use it, forget it. Tomorrow there is another one.</p>
+        <div class="form-box" id="newsletter-form">
+          <p class="form-kicker">Join the daily CSOS newsletter</p>
+          <form class="optin-form" id="newsletterForm">
+            <label for="name">First name</label>
+            <input id="name" name="name" type="text" autocomplete="given-name" placeholder="First name" required>
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="Email address" required>
+            <button class="btn btn--block" id="submitBtn" type="submit">Join the newsletter</button>
+          </form>
+          <p class="privacy" style="color: rgba(255,255,255,0.7);">No spam. Unsubscribe in one click anytime.</p>
+          <p class="form-status" id="formStatus">Done. Check your inbox.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="sticky-cta" href="#newsletter">Join the newsletter</a>
+
+  <footer>
+    <div class="wrap">
+      <span>Creative Strategy Operating System</span>
+      <span>
+        <a href="/businessbook/">Free Book</a>
+        &nbsp;·&nbsp;
+        <a href="/quiz/">Skills Quiz</a>
+        &nbsp;·&nbsp;
+        <a href="/sprint/">Sprint</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    const kitFormUrl = 'https://app.kit.com/forms/9426823/subscriptions';
+    const kitTags = [19490154, 18483789];
+    const thankYouUrl = '/businessbook/thanks/';
+
+    const form = document.getElementById('newsletterForm');
+    const status = document.getElementById('formStatus');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const data = new FormData(form);
+      const name = String(data.get('name') || '').trim();
+      const email = String(data.get('email') || '').trim();
+      if (!name || !email) return;
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      try {
+        await fetch(kitFormUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            email_address: email,
+            first_name: name,
+            tags: kitTags
+          })
+        });
+      } catch (error) {
+        console.error('Opt-in error:', error);
+      }
+      status.style.display = 'block';
+      btn.textContent = 'Joined';
+      window.setTimeout(function() {
+        window.location.href = thankYouUrl;
+      }, 350);
+    });
+  </script>
+</body>
+</html>
