@@ -82,6 +82,59 @@ p { margin: 0 0 1.1em; }
 }
 .nav-links a:hover { color: var(--teal); }
 .nav-links a.active { color: var(--teal); }
+
+/* Force the primary CTA button to white text on teal regardless of nav-link rule above */
+.nav-links a.nav-cta,
+.nav-links a.nav-cta:hover,
+.nav-links a.nav-cta:visited {
+  color: var(--white) !important;
+}
+
+/* Dropdown submenu (Work → Product Marketing / Email & Lifecycle) */
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.nav-dropdown > a::after {
+  content: " ▾";
+  font-size: 0.7em;
+  margin-left: 4px;
+  color: inherit;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  padding: 8px 0;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 22px 44px rgba(0, 77, 77, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+  z-index: 30;
+}
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-menu a {
+  display: block;
+  padding: 10px 18px;
+  color: var(--ink) !important;
+  font-family: "Changa One", "Impact", sans-serif;
+  letter-spacing: 0.06em;
+  font-size: 0.86rem;
+  text-transform: none;
+  text-decoration: none;
+}
+.dropdown-menu a:hover { background: var(--paper-2); color: var(--teal) !important; }
 .brand {
   text-decoration: none;
   display: inline-flex;
